@@ -8,6 +8,7 @@ import { Orders, Calendar, Employees, Stacked, Pyramid, Customers, Kanban, Line,
 import './App.css';
 
 import { useStateContext } from './Contexts/ContextProvider';
+import Login from './Pages/Login';
 
 const App = () => {
   const { setCurrentColor, setCurrentMode, currentMode, activeMenu, currentColor, themeSettings, setThemeSettings } = useStateContext();
@@ -24,7 +25,7 @@ const App = () => {
   return (
     <div className={currentMode === 'Dark' ? 'dark' : ''}>
       <BrowserRouter>
-        <div className="flex relative dark:bg-main-dark-bg">
+        {/* <div className="flex relative dark:bg-main-dark-bg">
           <div className="fixed right-4 bottom-4" style={{ zIndex: '1000' }}>
             <TooltipComponent
               content="Settings"
@@ -61,21 +62,21 @@ const App = () => {
               <Navbar />
             </div>
             <div>
-              {themeSettings && (<ThemeSettings />)}
+              {themeSettings && (<ThemeSettings />)} */}
 
               <Routes>
                 {/* dashboard  */}
-                <Route path="/" element={(<Industries />)} />
+                <Route path="/" element={(<Login />)} />
                 <Route path="/panel" element={(<Industries />)} />
                 {/* pages  */}
                 <Route path="/orders" element={<Orders />} />
                 <Route path="/employees" element={<Employees />} />
                 <Route path="/customers" element={<Customers />} />
               </Routes>
-            </div>
+            {/* </div>
             <Footer />
           </div>
-        </div>
+        </div> */}
       </BrowserRouter>
     </div>
   );
