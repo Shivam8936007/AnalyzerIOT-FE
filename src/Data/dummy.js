@@ -587,6 +587,16 @@ export const earningData = [
     iconBg: 'rgb(235, 250, 242)',
     pcColor: 'red-600',
   },
+  {
+    icon: <FiBarChart />,
+    amount: '423,39',
+    percentage: '+38%',
+    title: 'Sales',
+    iconColor: 'rgb(228, 106, 118)',
+    iconBg: 'rgb(255, 244, 229)',
+
+    pcColor: 'green-600',
+  },
 ];
 
 export const recentTransactions = [
