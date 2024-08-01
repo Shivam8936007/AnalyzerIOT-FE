@@ -22,9 +22,9 @@ const App = () => {
   }, []);
 
   return (
-    <div className={currentMode === 'Dark' ? 'dark' : ''}>
+    // <div className={currentMode === 'Dark' ? 'dark' : ''}>
       <BrowserRouter>
-        <div className="flex relative dark:bg-main-dark-bg">
+        <div className="flex back_set dark:bg-main-dark-bg">
           <div className="fixed right-4 bottom-4" style={{ zIndex: '1000' }}>
             <TooltipComponent
               content="Settings"
@@ -42,7 +42,7 @@ const App = () => {
             </TooltipComponent>
           </div>
           {activeMenu ? (
-            <div className="w-72 fixed sidebar dark:bg-secondary-dark-bg ">
+            <div className="sidebar dark:bg-secondary-dark-bg ">
               <Sidebar />
             </div>
           ) : (
@@ -51,17 +51,13 @@ const App = () => {
             </div>
           )}
           <div
-            className={
-              activeMenu
-                ? 'dark:bg-main-dark-bg  bg-main-bg min-h-screen md:ml-72 w-full  '
-                : 'bg-main-bg dark:bg-main-dark-bg  w-full min-h-screen flex-2 '
-            }
+            className={'flex flex-col h-screen w-full overflow-y-scroll pl-2 pr-2'}
           >
-            <div className="fixed md:static bg-main-bg dark:bg-main-dark-bg navbar w-full ">
+            <div className="fixed md:static navbar w-full p-5">
               <Navbar />
             </div>
-            <div>
-              {themeSettings && (<ThemeSettings />)}
+            <div className="w-full p-5">
+              {/* {themeSettings && (<ThemeSettings />)} */}
 
               <Routes>
                 {/* dashboard  */}
@@ -73,11 +69,11 @@ const App = () => {
                 <Route path="/customers" element={<Customers />} />
               </Routes>
             </div>
-            <Footer />
+            {/* <Footer /> */}
           </div>
         </div>
       </BrowserRouter>
-    </div>
+    // </div>
   );
 };
 
