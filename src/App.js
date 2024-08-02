@@ -43,7 +43,7 @@ const App = () => {
             </TooltipComponent>
           </div>
           {activeMenu ? (
-            <div className="sidebar dark:bg-secondary-dark-bg ">
+            <div className="dark:bg-secondary-dark-bg ">
               <Sidebar />
             </div>
           ) : (
