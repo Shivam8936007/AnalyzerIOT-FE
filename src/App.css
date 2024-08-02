@@ -55,13 +55,13 @@
 }
 
 .back_set {
-  background: url("../public/back4.png");
-  /* background: linear-gradient(
+  /* background: url("../public/back5.png"); */
+  background: linear-gradient(
     106.37deg,
-    #ffe1bc 29.63%,
-    #ffcfd1 51.55%,
-    #f3c6f1 90.85%
-  ); */
+    #2b4866 29.63%,
+    #69a4c8 51.55%,
+    #22374a 90.85%
+  );
   background-position: cover;
   background-repeat: no-repeat;
   overflow: hidden;
@@ -70,7 +70,8 @@
   left: 0;
   width: 100%;
   height: 100vh;
-  background: linear-gradient(rgba(0, 0, 0, 0.3));
+  /* background-color: #eef3f4; */
+  /* background: linear-gradient(rgba(0, 0, 0, 0.3)); */
   z-index: -1;
   object-fit: fill;
 }
@@ -80,26 +81,37 @@
   background-color: rgba(255, 255, 255, 0.2);
 }
 
+.card_white{
+  background-color: #efebeb;
+}
+
 .card_background_0 {
-  /* background-color: linear-gradient(rgba(205, 139, 243, 0.5), rgba(240, 56, 163, 0.5)); */
-  background-image: linear-gradient(rgba(230, 248, 27, 0.2), rgba(11, 134, 37, 0.2));
+  /* background-color: #ccc4f9 */
+  background-image: linear-gradient(rgba(122, 122, 118, 0.1), rgba(114, 116, 114, 0.1));
 }
 .card_background_1 {
-  /* background-color: linear-gradient(rgba(205, 139, 243, 0.5), rgba(240, 56, 163, 0.5)); */
+  /* background-color: #afccf4 */
   background-image: linear-gradient(rgba(249, 83, 33, 0.2), rgba(11, 134, 37, 0.2));
 }
 .card_background_2 {
-  /* background-color: linear-gradient(rgba(205, 139, 243, 0.5), rgba(240, 56, 163, 0.5)); */
+  /* background-color: #92d1af */
   background-image: linear-gradient(rgba(127, 105, 240, 0.2), rgba(77, 153, 246, 0.2));
 }
 .card_background_3 {
-  /* background-color: linear-gradient(rgba(205, 139, 243, 0.5), rgba(240, 56, 163, 0.5)); */
+  /* background-color: #afccf4 */
   background-image: linear-gradient(rgba(105, 208, 240, 0.1), rgba(237, 95, 239, 0.1));
 }
 .card_background_4 {
-  /* background-color: linear-gradient(rgba(205, 139, 243, 0.5), rgba(240, 56, 163, 0.5)); */
+  /* background-color: #afccf4 */
   background-image: linear-gradient(rgba(243, 7, 7, 0.2), rgba(242, 246, 9, 0.2));
 }
 .card_background:hover {
   background-image: linear-gradient(rgba(253, 254, 255, 0.74), rgba(255, 255, 255, 0.5));
 }
+
+/* .sidebar{
+  background-color: #fafafa;
+  border-top-right-radius: 1.5rem;
+  border-bottom-right-radius: 1.5rem;
+  box-shadow:  v-shadow blur spread color inset;  
+} */

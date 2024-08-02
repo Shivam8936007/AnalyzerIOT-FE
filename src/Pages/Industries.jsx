@@ -28,9 +28,9 @@ const Industries = () => {
         data: [55, 23, 96],
         // you can set indiviual colors for each bar
         backgroundColor: [
-          "rgba(255, 255, 22, 0.6)",
-          "rgba(255, 55, 255, 0.6)",
-          "rgba(25, 255, 255, 0.6)",
+          "#fd6e62",
+          "#afccf4",
+          "#92d1af",
         ],
         borderWidth: 1,
       },
@@ -50,7 +50,7 @@ const Industries = () => {
         {earningData.map((item, index) => (
           <div
             key={item.title}
-            className={`card_background_3 p-5 rounded-3xl shadow-xl shadow-slate-400 border-[1px] border-white`}
+            className={`back_transparent p-5 rounded-2xl border-[1px] border-slate-500 `}
           >
             <button
               type="button"
@@ -60,7 +60,7 @@ const Industries = () => {
               {item.icon}
             </button>
             <p className="mt-3">
-              <span className="text-[2rem] font-[900] hover:text-[2.1rem] hover:font-[900] hover:text-slate-[800]">
+              <span className="text-[1.5rem] font-[700] hover:text-[1.5rem] hover:font-[700] hover:text-slate-[800] text-slate-200">
                 {item.amount}
               </span>
               <span
@@ -76,13 +76,13 @@ const Industries = () => {
         ))}
       </div>
 
-      <div className="grid sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-2 gap-5 mt-8">
-        <div className="card_background_3 p-5 rounded-3xl shadow-xl shadow-slate-400 border-[1px] border-white">
+      <div className="grid sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-2 gap-5 mt-8 ">
+        <div className="p-5 rounded-2xl back_transparent">
           <div className="flex justify-between items-center gap-2 mb-10">
             <p className="text-xl font-semibold">Sales Overview</p>
             {/* <DropDown currentMode={currentMode} /> */}
           </div>
-          <div className="md:w-full overflow-auto">
+          <div className="md:w-full overflow-auto ">
             <Pie
               data={data}
               options={options}
