@@ -2,18 +2,17 @@ import React from 'react';
 import { useForm } from "react-hook-form";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faTwitter, faFacebookF, faInstagram, faYoutube } from "@fortawesome/free-brands-svg-icons";
-import bgimg from '../Data/aerial-view-of-circular-water-treatment-tank.jpg'
-import logo from '../Data/eielogo.png'
+import bgimg from '../assests/aerial-view-of-circular-water-treatment-tank.jpg'
+import logo from '../assests/eiecs_logo.png'
 
 export default function Login() {
     const { register, handleSubmit } = useForm();
     const onSubmit = handleSubmit((data) => {
         console.log(data)
     })
-
     return (
-        <div className="flex flex-col items-center justify-center min-h-screen py-2 bg-[#f3e1e3] font-montserrat">
-            <img src={bgimg} alt="" className='absolute inset-0 w-full h-full object-cover z-0 opacity-50' />
+        <div className="flex flex-col items-center justify-center min-h-screen py-2 font-montserrat rounded-3xl">
+            {/* <img src={bgimg} alt="" className='absolute inset-0 w-full h-full object-cover z-0 opacity-50' /> */}
             <main className="flex flex-col items-center justify-center w-full flex-1 px-20 text-center">
                 <div className="flex w-2/3 max-w-4xl bg-white bg-opacity-95 shadow-inner rounded-[10px] shadow-gray-200 z-10">
                     <div className="w-1/2 p-2 ">
@@ -60,7 +59,7 @@ export default function Login() {
                             </div>
                         </form>
                     </div>
-                    <div className="w-1/2 bg-gradient-to-r from-[#c3ecaa] to-[#789859] text-white rounded-r-[10px] py-48 px-14">
+                    <div className="w-1/2 bg-gradient-to-r from-[#c994f3] to-[#a149f9] text-white rounded-r-[10px] py-48 px-14">
                         {/* <img src={logo} alt="" className='' /> */}
                         <h2 className="text-3xl font-extrabold mb-4">
                             Welcome Back! 
