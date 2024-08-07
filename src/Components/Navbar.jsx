@@ -1,7 +1,6 @@
 import React, { useEffect } from "react";
 import { AiOutlineMenu } from "react-icons/ai";
 import { MdKeyboardArrowDown } from "react-icons/md";
-import { TooltipComponent } from "@syncfusion/ej2-react-popups";
 import { IoSettings } from "react-icons/io5";
 import { IoMdNotifications } from "react-icons/io";
 
@@ -9,7 +8,6 @@ import avatar from "../Data/avatar.jpg";
 import { useStateContext } from "../Contexts/ContextProvider";
 
 const NavButton = ({ title, customFunc, icon, color, dotColor }) => (
-  <TooltipComponent content={title} position="BottomCenter">
     <button
       type="button"
       onClick={() => customFunc()}
@@ -22,7 +20,6 @@ const NavButton = ({ title, customFunc, icon, color, dotColor }) => (
       />
       {icon}
     </button>
-  </TooltipComponent>
 );
 
 const Navbar = () => {
@@ -68,7 +65,6 @@ const Navbar = () => {
         <div className="flex justify-center items-center gap-2">
           <IoSettings className="w-6 h-6 text-violet-900" />
           <IoMdNotifications className="w-6 h-6 text-violet-900" />
-          <TooltipComponent content="Profile" position="BottomCenter">
             <div
               className="flex items-center gap-2 cursor-pointer p-1 hover:bg-light-gray rounded-lg"
               onClick={() => handleClick("userProfile")}
@@ -86,7 +82,6 @@ const Navbar = () => {
               </p>
               <MdKeyboardArrowDown className="text-gray-400 text-14" />
             </div>
-          </TooltipComponent>
         </div>{" "}
       </div>
     </div>

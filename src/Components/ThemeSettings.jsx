@@ -1,7 +1,6 @@
 import React, { useState } from "react";
 import { MdOutlineCancel } from "react-icons/md";
 import { BsCheck } from "react-icons/bs";
-import { TooltipComponent } from "@syncfusion/ej2-react-popups";
 
 import { themeColors } from "../Data/dummy";
 import { useStateContext } from "../Contexts/ContextProvider";
@@ -59,7 +58,7 @@ const ThemeSettings = () => {
         <div className="flex-col border-t-1 border-color p-4 ml-4">
           <p className="font-semibold text-lg">Theme Colors</p>
           <div className="flex gap-3">
-            {themeColors.map((item, index) => (
+            {/* {themeColors.map((item, index) => (
               <TooltipComponent
                 key={index}
                 content={item.name}
@@ -83,7 +82,7 @@ const ThemeSettings = () => {
                   </button>
                 </div>
               </TooltipComponent>
-            ))}
+            ))} */}
           </div>
         </div>
       </div>

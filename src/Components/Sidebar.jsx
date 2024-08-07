@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { Link, NavLink } from "react-router-dom";
 import { SiShopware } from "react-icons/si";
 import { MdOutlineCancel } from "react-icons/md";
-import { TooltipComponent } from "@syncfusion/ej2-react-popups";
+// import { TooltipComponent } from "@syncfusion/ej2-react-popups";
 import { links } from "../Data/dummy";
 import { useStateContext } from "../Contexts/ContextProvider";
 
@@ -28,7 +28,7 @@ const Sidebar = () => {
             <Link to="/" onClick={handleCloseSidebar} className="items-center gap-3 ml-3 mt-4 flex text-xl font-extrabold tracking-tight dark:text-white text-slate-900">
               <SiShopware /> <span>EIE Complete Solutions</span>
             </Link>
-            <TooltipComponent content="Menu" position="BottomCenter">
+            {/* <TooltipComponent content="Menu" position="BottomCenter"> */}
               <button
                 type="button"
                 onClick={() => setActiveMenu(!activeMenu)}
@@ -37,7 +37,7 @@ const Sidebar = () => {
               >
                 <MdOutlineCancel />
               </button>
-            </TooltipComponent>
+            {/* </TooltipComponent> */}
           </div>
           <div className="mt-10 ">
             {links.map((item) => (

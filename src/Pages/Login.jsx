@@ -59,7 +59,7 @@ export default function Login() {
                             </div>
                         </form>
                     </div>
-                    <div className="w-1/2 bg-gradient-to-r from-[#c994f3] to-[#a149f9] text-white rounded-r-[10px] py-48 px-14">
+                    <div className="w-1/2 bg-gradient-to-r from-[#6fb0a5]   to-[rgb(75,135,146)] text-white rounded-r-[10px] py-48 px-14">
                         {/* <img src={logo} alt="" className='' /> */}
                         <h2 className="text-3xl font-extrabold mb-4">
                             Welcome Back! 

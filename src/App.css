@@ -166,7 +166,18 @@ body{
 }
 .bg-blur{
   filter: blur(90px);
+  background-color:#f4bbff;
 }
+/* .bg-primary{
+  background-color: #96f5a9;
+}
+.bg-teal{
+  background-color: #e7fc7f;
+}
+.bg-purple{
+  background-color: #f5ce4d;
+} */
+
 .bg-primary{
   background-color: rgb(30, 0, 255);
 }

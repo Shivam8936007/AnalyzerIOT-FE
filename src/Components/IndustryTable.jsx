@@ -9,18 +9,19 @@ const IndustryTable = () => {
   //   );
 
   const header = [
-    { key: 1, title: "Session Id" },
-    { key: 2, title: "Vehicle" },
-    { key: 3, title: "Duration" },
-    { key: 4, title: "Date-Time" },
-    { key: 5, title: "Energy Consumed" },
-    { key: 6, title: "Amount" },
-    { key: 7, title: "Status" },
+    { key: 1, title: "S No." },
+    { key: 2, title: "Industry ID" },
+    { key: 3, title: "Industry Name" },
+    { key: 4, title: "Device Status" },
+    { key: 5, title: "Data Uploaded On"},
+    { key: 6, title: "State" },
+    { key: 7, title: "Category" },
+    { key: 8, title: "Confiuration Date" },
   ];
   return (
     <div className="bg-gradient-to-r from-gradientStart to-gradientEnd  shadow-lg p-4  h-[45rem] w-full rounded-custom">
-      <h2 className=" ml-5 mb-4 text-gray-200 font-[700] text-[1.5rem] text-base leading-5 w-[100%] font-montserrat">
-        Charging Sessions
+      <h2 className=" ml-5 mb-4 text-slate-500 font-[700] text-[1.5rem] text-base leading-5 w-[100%] font-montserrat">
+        Industry Insight
       </h2>
       <div className="overflow-hidden rounded-lg">
         <div className="overflow-y-auto  h-[40rem] scrollbar-hide">
