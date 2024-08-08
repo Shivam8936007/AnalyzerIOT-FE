@@ -6,6 +6,7 @@ import { Industries, Login, AddIndustry } from "./Pages";
 import "./App.css";
 
 import { useStateContext } from "./Contexts/ContextProvider";
+import ProtectedRoute from "./ProtectedRoute";
 
 // Define the type for the state context
 interface StateContextType {
@@ -15,7 +16,8 @@ interface StateContextType {
 }
 
 const AppContent: React.FC = () => {
-  const { setCurrentColor, setCurrentMode, activeMenu } = useStateContext() as StateContextType;
+  const { setCurrentColor, setCurrentMode, activeMenu } =
+    useStateContext() as StateContextType;
   const location = useLocation();
 
   useEffect(() => {
@@ -30,12 +32,12 @@ const AppContent: React.FC = () => {
   const isLoginPage = location.pathname === "/login";
 
   return (
-    <div className="h-screen w-screen bg-slate-100">
+    <div className="h-screen w-screen bgm">
       <div className="absolute inset-0 justify-center">
-        <div className="bg-shape3 bg-violet-700 opacity-4 bg-blur"></div>
-        <div className="bg-shape1 bg-teal opacity-50 bg-blur"></div>
-        <div className="bg-shape2 bg-primary opacity-50 bg-blur"></div>
-        <div className="bg-shape1 bg-purple opacity-50 bg-blur"></div>
+        <div className="bg-shape3 opacity-40 bg-blur"></div>
+        <div className="bg-shape1 bg-teal opacity-30 bg-blur"></div>
+        <div className="bg-shape2 bg-primary opacity-30 bg-blur"></div>
+        <div className="bg-shape1 bg-purple opacity-30 bg-blur"></div>
       </div>
       <div className={`flex ${!isLoginPage && "dark:bg-main-dark-bg"}`}>
         {!isLoginPage && (
@@ -51,7 +53,11 @@ const AppContent: React.FC = () => {
             )}
           </>
         )}
-        <div className={"flex flex-col h-screen w-full overflow-y-scroll pl-2 pr-2"}>
+        <div
+          className={
+            "flex flex-col h-screen w-full overflow-y-scroll pl-2 pr-2"
+          }
+        >
           {!isLoginPage && (
             <div className="fixed md:static navbar w-full p-5">
               <Navbar />
@@ -59,10 +65,16 @@ const AppContent: React.FC = () => {
           )}
           <div className="w-full p-5">
             <Routes>
-              <Route path="/" element={<Industries />} />
-              <Route path="/industries" element={<Industries />} />
+              {/* <Route path="/industries" element={<Industries />} /> */}
+              <Route
+                path="/"
+                element={<ProtectedRoute element={<Industries />} />}
+              />
               <Route path="/login" element={<Login />} />
-              <Route path="/add-industry" element={<AddIndustry />} />
+              <Route
+                path="/add-industry"
+                element={<ProtectedRoute element={<AddIndustry />} />}
+              />
             </Routes>
           </div>
         </div>

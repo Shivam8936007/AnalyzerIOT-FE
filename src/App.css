@@ -59,13 +59,7 @@ body{
 }
 
 .back_set {
-  /* background: url("../public/back5.png"); */
-  background: linear-gradient(
-    106.37deg,
-    #2b4866 29.63%,
-    #69a4c8 51.55%,
-    #22374a 90.85%
-  );
+  background: url("../public/background.png");
   background-position: cover;
   background-repeat: no-repeat;
   overflow: hidden;
@@ -166,7 +160,7 @@ body{
 }
 .bg-blur{
   filter: blur(90px);
-  background-color:#f4bbff;
+  background-color:#bbdcff;
 }
 /* .bg-primary{
   background-color: #96f5a9;
@@ -179,11 +173,39 @@ body{
 } */
 
 .bg-primary{
-  background-color: rgb(30, 0, 255);
+  background-color: rgb(105, 249, 249);
 }
 .bg-teal{
-  background-color: rgb(255, 52, 173);
+  background-color: #6aa7cd;
 }
 .bg-purple{
-  background-color: rgb(140, 0, 215);
+  background-color: rgb(141, 246, 230);
 }
+
+.bgm{
+  background-image: linear-gradient(to top, #fff1eb 0%, #ace0f9 100%);
+  /* background-image: linear-gradient(to top, #c1dfc4 0%, #deecdd 100%); */
+  /* background-image: linear-gradient(to top, #09203f 0%, #537895 100%); */
+  /* background-image: linear-gradient(to top, #c1dec4 10%, #f2f1dd 50%); */
+}
+
+
+/* @keyframes drop { */
+  /* 0% { */
+    /* transform: translateY(-100%); */
+    /* opacity: 0; */
+  /* } */
+  /* 100% { */
+    /* transform: translateY(0); */
+    /* opacity: 1; */
+  /* } */
+/* } */
+
+/* .logo1 { */
+  /* width: 100px; Adjust size as needed */
+  /* animation: drop 2s ease-out; */
+  /* position: absolute; */
+  /* top: 0; */
+  /* left: 50%; */
+  /* transform: translateX(-50%); */
+/* } */

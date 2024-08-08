@@ -5,6 +5,7 @@ import { MdOutlineCancel } from "react-icons/md";
 // import { TooltipComponent } from "@syncfusion/ej2-react-popups";
 import { links } from "../Data/dummy";
 import { useStateContext } from "../Contexts/ContextProvider";
+import eielogo from "../assests/eiecs_logo.png";
 
 const Sidebar = () => {
   const { activeMenu, setActiveMenu, screenSize, currentColor } = useStateContext();
@@ -24,10 +25,12 @@ const Sidebar = () => {
     <div className="ml-3 h-screen md:overflow-hidden overflow-auto md:hover:overflow-auto pb-10 border-r border-gray-300 rounded-tr-3xl rounded-br-3xl">
       {activeMenu && (
         <>
-          <div className="flex justify-between items-center">
+          <div className="flex-1 justify-between items-center">
+            
             <Link to="/" onClick={handleCloseSidebar} className="items-center gap-3 ml-3 mt-4 flex text-xl font-extrabold tracking-tight dark:text-white text-slate-900">
               <SiShopware /> <span>EIE Complete Solutions</span>
             </Link>
+            {/* <img src={eielogo} alt="" className="logo1" /> */}
             {/* <TooltipComponent content="Menu" position="BottomCenter"> */}
               <button
                 type="button"
@@ -37,8 +40,10 @@ const Sidebar = () => {
               >
                 <MdOutlineCancel />
               </button>
+              
             {/* </TooltipComponent> */}
           </div>
+          
           <div className="mt-10 ">
             {links.map((item) => (
               <div key={item.name} className="cursor-pointer">
@@ -61,7 +66,9 @@ const Sidebar = () => {
           </div>
         </>
       )}
+      
     </div>
+    
     // </div>
   );
 };

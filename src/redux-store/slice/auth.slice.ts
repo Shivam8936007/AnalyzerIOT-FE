@@ -2,31 +2,34 @@
 import { createAsyncThunk, createSlice, PayloadAction } from '@reduxjs/toolkit';
 import Cookies from 'js-cookie';
 import { toast } from 'react-toastify';
-import { ApiResponse } from '../types';
 import axiosInstance from '../../axios';
-const BASE_URL = 'http://localhost:3000/api/v1';
+const BASE_URL = 'http://localhost:8001/api/v1';
 
 interface AuthState {
   user: object | null;
+  accessToken: string | null;
   isLoader: boolean;
   isError: boolean | null;
 }
 
 const initialState: AuthState = {
   user: null,
+  accessToken: null,
   isLoader: false,
   isError: null,
 };
 
-export const loginUser = createAsyncThunk<ApiResponse, any>(
+export const loginUser = createAsyncThunk<any, any>(
   "auth/loginUser",
   async (data, { rejectWithValue }) => {
     try {
       const url = `${BASE_URL}/auth/login`;
-      const resp = await axiosInstance.post(url, data)
+      const para = { industry_id: data?.userId, password: data?.password};
+      const resp = await axiosInstance.post(url, para);
       if (resp) {
-        Cookies.set('token', resp?.data?.token);
-        Cookies.set('user', JSON.stringify(resp.data));
+        Cookies.set('accessToken', resp?.data?.token);
+        Cookies.set('user', JSON.stringify(resp.data))
+        // router.push('/');
         return resp.data;
       }
     } catch (error: any) {
@@ -40,7 +43,7 @@ export const loginUser = createAsyncThunk<ApiResponse, any>(
   }
 );
 
-export const logoutUser = createAsyncThunk<ApiResponse>(
+export const logoutUser = createAsyncThunk<any>(
   "auth/logoutUser",
   async () => {
     const result = await axiosInstance.get(`${BASE_URL}/auth/logout`);
@@ -56,9 +59,11 @@ const authSlice = createSlice({
   reducers: {},
   extraReducers: (builder) => {
     builder
-      .addCase(loginUser.fulfilled, (state, action: PayloadAction<ApiResponse>) => {
+      .addCase(loginUser.fulfilled, (state, action: any) => {
         if (action.payload) {
-          state.user = action.payload.data;
+          console.log("actionpayload", action.payload)
+          state.user = action.payload;
+          state.accessToken = action.payload.token;
           state.isError = false;
           state.isLoader = false;
           if (action.payload.statusCode === 200) {
@@ -76,7 +81,7 @@ const authSlice = createSlice({
       .addCase(loginUser.pending, (state) => {
         state.isLoader = true;
       })
-      .addCase(logoutUser.fulfilled, (state, action: PayloadAction<ApiResponse>) => {
+      .addCase(logoutUser.fulfilled, (state, action: any) => {
         if (action.payload) {
           state.user = null;
           state.isError = false;
