@@ -1,17 +1,12 @@
-// src/components/ProtectedRoute.tsx
 import React from 'react';
+import { Navigate, Outlet } from 'react-router-dom';
 import { useSelector } from 'react-redux';
-import { Navigate } from 'react-router-dom';
 import { RootState } from './redux-store/store';
 
-interface ProtectedRouteProps {
-  element: React.ReactElement;
-}
+const ProtectedRoute: React.FC = () => {
+  const isAuthenticated = useSelector((state: RootState) => !!state.userData.accessToken);
 
-const ProtectedRoute: React.FC<ProtectedRouteProps> = ({ element }) => {
-  const { accessToken } = useSelector((state: RootState) => state.userData);
-
-  return accessToken ? element : <Navigate to="/login" />;
+  return isAuthenticated ? <Outlet /> : <Navigate to="/login" />;
 };
 
 export default ProtectedRoute;

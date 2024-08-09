@@ -1,33 +1,37 @@
 import React, { useEffect } from "react";
-import { BrowserRouter, Routes, Route, useLocation } from "react-router-dom";
-
+import {
+  BrowserRouter,
+  Routes,
+  Route,
+  useLocation,
+  useNavigate,
+} from "react-router-dom";
+import { useSelector } from "react-redux";
 import { Navbar, Sidebar } from "./Components";
 import { Industries, Login, AddIndustry } from "./Pages";
 import "./App.css";
-
-import { useStateContext } from "./Contexts/ContextProvider";
 import ProtectedRoute from "./ProtectedRoute";
-
-// Define the type for the state context
-interface StateContextType {
-  setCurrentColor: (color: string) => void;
-  setCurrentMode: (mode: string) => void;
-  activeMenu: boolean;
-}
+import { RootState } from "./redux-store/store";
+import Cookies from "js-cookie";
 
 const AppContent: React.FC = () => {
-  const { setCurrentColor, setCurrentMode, activeMenu } =
-    useStateContext() as StateContextType;
+  const navigate = useNavigate();
+  const isAuthenticated = useSelector(
+    (state: RootState) => !!state.userData.accessToken
+  );
+  const token = Cookies.get("accessToken");
   const location = useLocation();
 
   useEffect(() => {
-    const currentThemeColor = localStorage.getItem("colorMode");
-    const currentThemeMode = localStorage.getItem("themeMode");
-    if (currentThemeColor && currentThemeMode) {
-      setCurrentColor(currentThemeColor);
-      setCurrentMode(currentThemeMode);
+    if (token && !isAuthenticated) {
+      // If token exists in cookies but not in state, refresh the state
+      // This could involve dispatching an action to re-authenticate using the token
+      // For example: dispatch(refreshAuth(token))
     }
-  }, [setCurrentColor, setCurrentMode]);
+    if (isAuthenticated && location.pathname === "/login") {
+      navigate("/panel");
+    }
+  }, [token, isAuthenticated, navigate, location.pathname]);
 
   const isLoginPage = location.pathname === "/login";
 
@@ -40,24 +44,12 @@ const AppContent: React.FC = () => {
         <div className="bg-shape1 bg-purple opacity-30 bg-blur"></div>
       </div>
       <div className={`flex ${!isLoginPage && "dark:bg-main-dark-bg"}`}>
-        {!isLoginPage && (
-          <>
-            {activeMenu ? (
-              <div className="dark:bg-secondary-dark-bg ">
-                <Sidebar />
-              </div>
-            ) : (
-              <div className="w-0 dark:bg-secondary-dark-bg">
-                <Sidebar />
-              </div>
-            )}
-          </>
+        {!isLoginPage && isAuthenticated && (
+          <div className="dark:bg-secondary-dark-bg">
+            <Sidebar />
+          </div>
         )}
-        <div
-          className={
-            "flex flex-col h-screen w-full overflow-y-scroll pl-2 pr-2"
-          }
-        >
+        <div className="flex flex-col h-screen w-full overflow-y-scroll pl-2 pr-2">
           {!isLoginPage && (
             <div className="fixed md:static navbar w-full p-5">
               <Navbar />
@@ -65,16 +57,11 @@ const AppContent: React.FC = () => {
           )}
           <div className="w-full p-5">
             <Routes>
-              {/* <Route path="/industries" element={<Industries />} /> */}
-              <Route
-                path="/"
-                element={<ProtectedRoute element={<Industries />} />}
-              />
               <Route path="/login" element={<Login />} />
-              <Route
-                path="/add-industry"
-                element={<ProtectedRoute element={<AddIndustry />} />}
-              />
+              <Route element={<ProtectedRoute />}>
+                <Route path="/panel" element={<Industries />} />
+                <Route path="/add-industry" element={<AddIndustry />} />
+              </Route>
             </Routes>
           </div>
         </div>

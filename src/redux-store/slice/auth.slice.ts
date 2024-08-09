@@ -1,5 +1,5 @@
 // src/redux-store/slice/auth.slice.ts
-import { createAsyncThunk, createSlice, PayloadAction } from '@reduxjs/toolkit';
+import { createAsyncThunk, createSlice,isRejectedWithValue, PayloadAction } from '@reduxjs/toolkit';
 import Cookies from 'js-cookie';
 import { toast } from 'react-toastify';
 import axiosInstance from '../../axios';
@@ -10,6 +10,7 @@ interface AuthState {
   accessToken: string | null;
   isLoader: boolean;
   isError: boolean | null;
+  industryInsight: []
 }
 
 const initialState: AuthState = {
@@ -17,6 +18,7 @@ const initialState: AuthState = {
   accessToken: null,
   isLoader: false,
   isError: null,
+  industryInsight: []
 };
 
 export const loginUser = createAsyncThunk<any, any>(
@@ -50,6 +52,21 @@ export const logoutUser = createAsyncThunk<any>(
     Cookies.remove('token');
     Cookies.remove('user');
     return result.data;
+  }
+);
+
+export const fetchIndustryInsight = createAsyncThunk(
+  "stats/IndustryInsight",
+  async () => {
+    try {
+      let url = `${BASE_URL}/industry/all`;
+      const { data }: any = await axiosInstance.get(url);
+      console.log("sdsfdgbgdzdf", data)
+      return data;
+
+    } catch (error: any) {
+      return isRejectedWithValue(error);
+    }
   }
 );
 
@@ -100,7 +117,10 @@ const authSlice = createSlice({
       })
       .addCase(logoutUser.pending, (state) => {
         state.isLoader = true;
-      });
+      })
+      .addCase(fetchIndustryInsight.fulfilled, (state, action) => {
+        state.industryInsight = action.payload;
+      })
   }
 });
 

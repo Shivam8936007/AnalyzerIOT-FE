@@ -30,7 +30,7 @@ export default function Login() {
 
   useEffect(() => {
     if (accessToken) {
-      navigate('/');
+      navigate('/panel');
     }
   }, [accessToken, navigate]);
 

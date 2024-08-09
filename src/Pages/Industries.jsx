@@ -6,11 +6,17 @@ import SiteStatsCard from "../Components/SiteStatsCard";
 import SmallStatsCard from "../Components/SmallStatsCard";
 import Map from "../Components/Map";
 import IndustryTable from "../Components/IndustryTable";
+import {fetchIndustryInsight} from "../redux-store/slice/auth.slice"
+import { useEffect, } from "react";
+import { useAppDispatch } from "../redux-store/hook";
 
 Chart.register(ArcElement, Tooltip, Legend);
 
 
 const Industries = () => {
+
+  const dispatch = useAppDispatch();
+
   const data = {
     labels: ["Active", "Offline", "Delayed"],
     datasets: [
@@ -31,6 +37,11 @@ const Industries = () => {
       },
     },
   };
+
+  useEffect(() => {
+    dispatch( fetchIndustryInsight());
+  }, [dispatch]);
+
   return (
     <div className="h-screen w-full">
       <SiteStatsCard />

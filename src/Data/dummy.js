@@ -470,29 +470,6 @@ export const employeesGrid = [
     textAlign: 'Center' },
 ];
 
-export const links = [
-  {
-    // title: 'Dashboard',
-    links: [
-      {
-        name: 'panel',
-        icon: <FiShoppingBag />,
-      },
-      {
-        name: 'industries',
-        icon: <FaIndustry />,
-      },
-      {
-        name: 'add-industries',
-        icon: <FiShoppingBag />,
-      },
-      {
-        name: 'Notification',
-        icon: <FiShoppingBag />,
-      },
-    ],
-  },  
-];
 
 export const cartData = [
   {
