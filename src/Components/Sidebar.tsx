@@ -26,7 +26,7 @@ const Sidebar: React.FC = () => {
     <div className={`bg-gray-800 h-screen p-5 pt-8 ${isOpen ? 'w-[18rem]' : 'w-20'} transition-width duration-300`}>
       <div className="flex justify-between items-center mb-8">
         <div className="text-white text-xl font-semibold flex items-center">
-          <img src="/logo.png" alt="Logo" className="w-10 h-10 mr-2" />
+          <img src="../assests/eiecs_logo.png" alt="Logo" className="w-10 h-10 mr-2" />
           <span className={`${!isOpen && 'hidden'} transition-all duration-300`}>Eie complete solution</span>
         </div>
         <FaBars

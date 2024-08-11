@@ -21,9 +21,9 @@ const AppContent: React.FC = () => {
     // if (token && !isAuthenticated) {
 
     // }
-    if (location.pathname === "/login") {
-      navigate("/panel");
-    }
+    // if (location.pathname === "/login") {
+    //   navigate("/panel");
+    // }
   }, [token, navigate, location.pathname]);
 
   const isLoginPage = location.pathname === "/login";
