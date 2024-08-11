@@ -1,85 +1,57 @@
-import React from "react";
-import { Link, NavLink } from "react-router-dom";
-import { MdOutlineCancel } from "react-icons/md";
-import { useStateContext } from "../Contexts/ContextProvider";
-// import eielogo from "../assets/eiecs_logo.png";
-import { FiShoppingBag } from "react-icons/fi";
-import { FaIndustry } from "react-icons/fa";
+import React, { useState } from 'react';
+import { FaBars, FaIndustry, FaPlusCircle, FaSignOutAlt, FaThLarge } from 'react-icons/fa';
+import { NavLink } from 'react-router-dom';
+
+interface NavItem {
+  name: string;
+  icon: JSX.Element;
+  path: string;
+}
 
 const Sidebar: React.FC = () => {
-  const links = [
-    {
-      name: 'panel',
-      icon: <FiShoppingBag />,
-    },
-    {
-      name: 'industries',
-      icon: <FaIndustry />,
-    },
-    {
-      name: 'add-industry',
-      icon: <FiShoppingBag />,
-    },
-    {
-      name: 'notification',
-      icon: <FiShoppingBag />,
-    },
-  ];
+  const [isOpen, setIsOpen] = useState(true);
 
-  const { activeMenu, setActiveMenu, screenSize, currentColor } =
-    useStateContext();
-
-  const handleCloseSidebar = () => {
-    if (activeMenu && screenSize <= 900) {
-      setActiveMenu(false);
-    }
+  const toggleSidebar = () => {
+    setIsOpen(!isOpen);
   };
 
-  return (
-    <div className="ml-3 h-screen md:overflow-hidden overflow-auto md:hover:overflow-auto pb-10 border-r border-gray-300 rounded-tr-3xl rounded-br-3xl">
-      {activeMenu && (
-        <>
-          <div className="flex items-center justify-between">
-            {/* <img src={eielogo} alt="EIECS Logo" className="logo1" /> */}
-            <Link
-              to="/"
-              onClick={handleCloseSidebar}
-              className="items-center gap-3 ml-5 mt-2 flex text-xl font-extrabold tracking-tight dark:text-white text-slate-900"
-            >
-              <span>EIE Complete Solutions</span>
-            </Link>
-            <button
-              type="button"
-              onClick={() => setActiveMenu(!activeMenu)}
-              style={{ color: currentColor }}
-              className="text-xl rounded-full p-3 hover:bg-light-gray mt-4 block md:hidden"
-            >
-              <MdOutlineCancel />
-            </button>
-          </div>
+  const navItems: NavItem[] = [
+    { name: 'Overview', icon: <FaThLarge />, path: '/panel' },
+    { name: 'Industries', icon: <FaIndustry />, path: '/industries' },
+    { name: 'Add-Industries', icon: <FaPlusCircle />, path: '/add-industries' },
+    { name: 'Logout', icon: <FaSignOutAlt />, path: '/login' },
+  ];
 
-          <div className="mt-10">
-            {links.map((link) => (
-              <NavLink
-                to={`/${link.name}`}
-                key={link.name}
-                onClick={handleCloseSidebar}
-                style={({ isActive }) => ({
-                  backgroundColor: isActive ? currentColor : "",
-                })}
-                className={({ isActive }) =>
-                  isActive
-                    ? "flex items-center gap-5 pl-4 pt-3 pb-2.5 rounded-lg bg-violet-800 text-white text-[1rem] font-[500] m-3 cursor-pointer"
-                    : "flex items-center gap-5 pl-4 pt-3 pb-2.5 rounded-lg text-gray-800 text-[1rem] font-[500] hover:bg-violet-600 hover:text-slate-200 m-3 cursor-pointer"
-                }
-              >
-                {link.icon}
-                <span className="capitalize">{link.name}</span>
-              </NavLink>
-            ))}
-          </div>
-        </>
-      )}
+  return (
+    <div className={`bg-gray-800 h-screen p-5 pt-8 ${isOpen ? 'w-[18rem]' : 'w-20'} transition-width duration-300`}>
+      <div className="flex justify-between items-center mb-8">
+        <div className="text-white text-xl font-semibold flex items-center">
+          <img src="/logo.png" alt="Logo" className="w-10 h-10 mr-2" />
+          <span className={`${!isOpen && 'hidden'} transition-all duration-300`}>Eie complete solution</span>
+        </div>
+        <FaBars
+          className="text-white cursor-pointer"
+          onClick={toggleSidebar}
+        />
+      </div>
+      <ul className="text-white">
+        {navItems.map((item, index) => (
+          <li key={index} className="mb-6">
+            <NavLink
+              to={item.path}
+              className={({ isActive }) =>
+                `flex items-center p-2 hover:bg-gray-700 rounded-lg transition-colors duration-300 cursor-pointer ${isActive ? 'bg-gray-700' : ''}`
+              }
+              onClick={() => console.log(`${item.name} clicked`)}
+            >
+              <span className="text-xl">{item.icon}</span>
+              <span className={`ml-4 ${!isOpen && 'hidden'} transition-all duration-300`}>
+                {item.name}
+              </span>
+            </NavLink>
+          </li>
+        ))}
+      </ul>
     </div>
   );
 };

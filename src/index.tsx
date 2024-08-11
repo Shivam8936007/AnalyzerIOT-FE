@@ -8,8 +8,8 @@ import { Providers } from "./redux-store/provider";
 
 ReactDOM.render(
   <ContextProvider>
-    <Providers >
-      <App />
+    <Providers>
+        <App />
     </Providers>
   </ContextProvider>,
   document.getElementById("root")
