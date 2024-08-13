@@ -19,7 +19,7 @@ const AddIndustryForm = () => {
     const { name, value } = e.target;
     if (name.includes('address.')) {
       const addressField = name.split('.')[1];
-      setFormData({
+      setFormData({ 
         ...formData,
         address: {
           ...formData.address,

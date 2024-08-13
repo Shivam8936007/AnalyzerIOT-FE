@@ -205,7 +205,7 @@ body{
 }
 
 .logo1 { 
-  width: 150px;
+  width: 100px;
   animation: drop 1s ease-out;
   position: relative;
   bottom:0;

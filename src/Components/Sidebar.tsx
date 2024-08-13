@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { FaBars, FaIndustry, FaPlusCircle, FaSignOutAlt, FaThLarge } from 'react-icons/fa';
 import { NavLink } from 'react-router-dom';
+import logoimg from '../assests/eiecs_logo.png';
 
 interface NavItem {
   name: string;
@@ -24,10 +25,12 @@ const Sidebar: React.FC = () => {
 
   return (
     <div className={`bg-gray-800 h-screen p-5 pt-8 ${isOpen ? 'w-[18rem]' : 'w-20'} transition-width duration-300`}>
+      <img src={logoimg} alt="Logo" className="logo1" />
       <div className="flex justify-between items-center mb-8">
+      
         <div className="text-white text-xl font-semibold flex items-center">
-          <img src="../assests/eiecs_logo.png" alt="Logo" className="w-10 h-10 mr-2" />
-          <span className={`${!isOpen && 'hidden'} transition-all duration-300`}>Eie complete solution</span>
+          
+          <span className={`${!isOpen && 'hidden'} transition-all duration-300`}>EIE Complete Solutions</span>
         </div>
         <FaBars
           className="text-white cursor-pointer"

@@ -62,7 +62,7 @@ export const fetchIndustryInsight = createAsyncThunk(
       let url = `${BASE_URL}/industry/all`;
       const { data }: any = await axiosInstance.get(url);
       console.log("sdsfdgbgdzdf", data)
-      return data;
+      return data.data;
 
     } catch (error: any) {
       return isRejectedWithValue(error);
