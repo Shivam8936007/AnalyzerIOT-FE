@@ -135,7 +135,7 @@ function SiteStatsCard() {
             <div className="border border-gray-300 p-5 rounded-2xl flex flex-cols justify-between">
               <div>
                 <div className="flex justify-center items-center">
-                  <FaIndustry className="w-6 h-6 text-yellow-500" />
+                  <FaIndustry className="w-6 h-6 text-red-500" />
                   <p className="text-[1.2rem] font-[500] text-gray-600 ml-3">
                     In-active Sites
                   </p>

@@ -4,11 +4,28 @@ import moment from "moment";
 import { useSelector } from "react-redux";
 import { RootState } from "../redux-store/store";
 
+const getStateFromAddress = (address: string): string => {
+  // Remove any hyphens from the address
+  address = address.replace("-", "");
+
+  // Split the address into an array of words
+  const addressArray = address.split(" ");
+  const len = addressArray.length;
+
+  // Check if the third-last word exists and if it is "Pradesh"
+  if (addressArray[len - 3]) {
+    if (addressArray[len - 3].toLowerCase() === "pradesh") {
+      // If "Pradesh" is found, return the two words before it
+      return addressArray[len - 4] + " " + addressArray[len - 3];
+    }
+    // Otherwise, return the third-last word
+    return addressArray[len - 3];
+  }
+return addressArray[len - 1];
+};
+
 const IndustryTable = () => {
-  //   const router = useRouter();
-  //   const transactionsList = useSelector(
-  //     (state: RootState) => state.transactionsData.transactionsList
-  //   );
+
   const industryList = useSelector(
     (state: RootState) => state.userData.industryInsight
   );
@@ -25,6 +42,8 @@ const IndustryTable = () => {
     { key: 6, title: "Category" },
     { key: 7, title: "Confiuration Date" },
   ];
+  
+  
   return (
     <div className="bg-gradient-to-r from-gradientStart to-gradientEnd  shadow-lg p-4  h-[45rem] w-full rounded-custom">
       <h2 className=" ml-5 mb-5 text-black text-xl font-semibold  leading-5 w-[100%] font-montserrat">
@@ -66,7 +85,7 @@ const IndustryTable = () => {
                     {item?.devices.map((e: any) => (
                       <>
                       <span
-                        className={`p-[6px] text-slate-200 rounded-md text-xs m-1 ${
+                        className={`flex p-[6px] text-slate-200 rounded-md text-xs m-1 ${
                           e?.offline_notified
                             ? "bg-green-500"
                             : "bg-[#de4141]"
@@ -78,25 +97,31 @@ const IndustryTable = () => {
                     ))}
                   </td>
 
-                  <td className="px-4 text-cyan-800 text-[.87rem] text-[600] font-Montserrat">
+                  <td className="flex-1 px-4 text-cyan-800 text-[.87rem] font-Montserrat leading-[2rem]">
                     {
-                      item?.data_uploaded || "N/A"
-                      /* {moment
-                      .utc(item.start_time)
-                      .utcOffset("+05:30")
-                      .format("DD/MM/YYYY h:mm:ss")} */
+                      item?.devices.map((e: any, index: number) => (
+                        <h5 key={index}>
+                          {e.data_uploaded 
+                            ? moment(e.data_uploaded).format("DD-MM-YYYY") 
+                            : "N/A"}
+                        </h5>
+                      ))
                     }
                   </td>
 
                   <td className="px-4 text-cyan-800 text-[.87rem] text-[600] font-Montserrat">
-                    {item?.state || "N/A"}
+                    {getStateFromAddress(item?.state) || "N/A"}
                   </td>
                   <td className="px-4 text-cyan-800 text-[.87rem] text-[600] font-Montserrat">
                     {item?.industry_type || "N/A"}
                   </td>
 
-                  <td className="px-4 text-cyan-800 text-[.87rem] text-[600] font-Montserrat ">
-                    {item?.created || "N/A"}
+                  <td className="flex-1 px-4 text-cyan-800 text-[.87rem] font-Montserrat leading-[2rem]">
+                    {
+                      item?.created 
+                            ? moment().format("DD-MM-YYYY") 
+                            : "N/A"
+                    }
                   </td>
                 </tr>
               ))}

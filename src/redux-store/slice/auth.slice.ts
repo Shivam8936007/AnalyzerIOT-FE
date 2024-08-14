@@ -10,7 +10,8 @@ interface AuthState {
   accessToken: string | null;
   isLoader: boolean;
   isError: boolean | null;
-  industryInsight: []
+  industryInsight: [];
+  addIndustry:[];
 }
 
 const initialState: AuthState = {
@@ -18,7 +19,8 @@ const initialState: AuthState = {
   accessToken: null,
   isLoader: false,
   isError: null,
-  industryInsight: []
+  industryInsight: [],
+  addIndustry:[],
 };
 
 export const loginUser = createAsyncThunk<any, any>(
@@ -61,7 +63,7 @@ export const fetchIndustryInsight = createAsyncThunk(
     try {
       let url = `${BASE_URL}/industry/all`;
       const { data }: any = await axiosInstance.get(url);
-      console.log("sdsfdgbgdzdf", data)
+      console.log("Fetched Data", data)
       return data.data;
 
     } catch (error: any) {
@@ -69,6 +71,22 @@ export const fetchIndustryInsight = createAsyncThunk(
     }
   }
 );
+
+export const addIndustry = createAsyncThunk(
+  "stats/addIndustry",
+  async () => {
+    try {
+      let url = `${BASE_URL}/industry/add`;
+      const { data }: any = await axiosInstance.post(url);
+      console.log("Industry Added", data)
+      return data.data;
+
+    } catch (error: any) {
+      return isRejectedWithValue(error);
+    }
+  }
+);
+
 
 const authSlice = createSlice({
   name: 'auth',
@@ -121,6 +139,10 @@ const authSlice = createSlice({
       .addCase(fetchIndustryInsight.fulfilled, (state, action) => {
         state.industryInsight = action.payload;
       })
+      .addCase(addIndustry.fulfilled, (state, action) => {
+        state.addIndustry = action.payload;
+      })
+
   }
 });
 

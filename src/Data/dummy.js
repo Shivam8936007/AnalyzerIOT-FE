@@ -528,12 +528,12 @@ export const chatData = [
 
 export const earningData = [
   {
-    icon: <MdOutlineSupervisorAccount />,
+    icon: <FaIndustry className="w-6 h-6 text-yellow-500" />,
     amount: '9',
     percentage: '-4%',
     title: 'Delay Sites',
     iconColor: '#03C9D7',
-    iconBg: '#E5FAFB',
+    iconBg: '#ffffff',
     pcColor: 'red-600',
   },
   {

@@ -45,7 +45,7 @@ const AppContent: React.FC = () => {
       <div className="flex flex-col h-screen w-full overflow-y-scroll pl-2 pr-2">
         {!isLoginPage && (
           <div className="fixed md:static navbar w-full p-5">
-            <Navbar />
+            {/* <Navbar /> */}
           </div>
         )}
         <div className="w-full p-5">
