@@ -72,19 +72,34 @@ export const fetchIndustryInsight = createAsyncThunk(
   }
 );
 
+// export const addIndustry = createAsyncThunk(
+//   "stats/addIndustry",
+//   async () => {
+//     try {
+//       let url = `${BASE_URL}/industry/add`;
+//       const { data }: any = await axiosInstance.post(url);
+//       console.log("Industry Added", data)
+//       return data.data;
+
+//     } catch (error: any) {
+//       return isRejectedWithValue(error);
+//     }
+//   }
+// );
+
+
 export const addIndustry = createAsyncThunk(
   "stats/addIndustry",
-  async () => {
+  async (formData: any, { rejectWithValue }) => {
     try {
       let url = `${BASE_URL}/industry/add`;
-      const { data }: any = await axiosInstance.post(url);
-      console.log("Industry Added", data)
+      const { data }: any = await axiosInstance.post(url, formData);
+      console.log("Industry Added", data);
       return data.data;
-
     } catch (error: any) {
-      return isRejectedWithValue(error);
-    }
-  }
+      return rejectWithValue(error.response?.data || "Failed to add industry");
+    }
+  }
 );
 
 

@@ -1,6 +1,8 @@
 import React, { useState } from 'react';
 import { useSelector } from 'react-redux';
 import { RootState } from '../../redux-store/store';
+import { useAppDispatch } from "../../redux-store/hook";
+import { addIndustry } from '../../redux-store/slice/auth.slice';
 
 const AddIndustryForm = () => {
   const [formData, setFormData] = useState({
@@ -22,6 +24,8 @@ const AddIndustryForm = () => {
   );
   console.log("addindustry",Addindustry)
 
+
+  const dispatch = useAppDispatch();
   const handleChange = (e: { target: { name: any; value: any; }; }) => {
     const { name, value } = e.target;
     if (name.includes('address.')) {
@@ -40,8 +44,8 @@ const AddIndustryForm = () => {
 
   const handleSubmit = (e: { preventDefault: () => void; }) => {
     e.preventDefault();
+    dispatch(addIndustry(formData));
     console.log(formData);
-    // Add your form submission logic here
   };
 
   return (
