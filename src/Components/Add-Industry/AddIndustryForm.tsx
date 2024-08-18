@@ -3,6 +3,7 @@ import { useSelector } from "react-redux";
 import { RootState } from "../../redux-store/store";
 import { useAppDispatch } from "../../redux-store/hook";
 import { addIndustry } from "../../redux-store/slice/auth.slice";
+import toast from "react-hot-toast";
 
 const AddIndustryForm = () => {
   const [formData, setFormData] = useState({
@@ -44,11 +45,47 @@ const AddIndustryForm = () => {
 
   const handleSubmit = (e: { preventDefault: () => void }) => {
     e.preventDefault();
-    dispatch(addIndustry(formData));
-    console.log(formData);
-    let combined_add = `${formData.address.line1}, ${formData.address.city}, ${formData.address.state}, ${formData.address.country} - ${formData.address.pincode},`;
-    let payload = { ...formData, address: combined_add };
-    dispatch(addIndustry(payload));
+    if (
+      formData.email === "" ||
+      formData.phone === "" ||
+      formData.name === "" ||
+      formData.industry_type === ""
+    ) {
+      toast.error("Please enter the complete data", {
+        // icon: "👏",
+        style: {
+          borderRadius: "20px",
+          background: "#333",
+          color: "#fff",
+        },
+      });
+    } else {
+      let combined_add = `${formData.address.line1}, ${formData.address.city}, ${formData.address.state}, ${formData.address.country} - ${formData.address.pincode},`;
+      let payload = { ...formData, address: combined_add };
+      dispatch(addIndustry(payload));
+      toast.success("Successfully Added Industry!", {
+        // icon: "👏",
+        style: {
+          borderRadius: "20px",
+          background: "#333",
+          color: "#fff",
+        },
+      });
+
+      setFormData({
+        name: "",
+        email: "",
+        phone: "",
+        industry_type: "",
+        address: {
+          line1: "",
+          city: "",
+          state: "",
+          country: "India",
+          pincode: "",
+        },
+      });
+    }
   };
 
   return (

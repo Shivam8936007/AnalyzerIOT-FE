@@ -11,6 +11,7 @@ import { Industries, Login, AddIndustry } from "./Pages";
 import "./App.css";
 import ProtectedRoute from "./ProtectedRoute";
 import Cookies from "js-cookie";
+import { Toaster } from "react-hot-toast";
 
 const AppContent: React.FC = () => {
   const navigate = useNavigate();
@@ -19,7 +20,6 @@ const AppContent: React.FC = () => {
 
   useEffect(() => {
     // if (token && !isAuthenticated) {
-
     // }
     // if (location.pathname === "/login") {
     //   navigate("/panel");
@@ -65,6 +65,7 @@ const AppContent: React.FC = () => {
 const App: React.FC = () => (
   <BrowserRouter>
     <AppContent />
+    <Toaster position="top-center" reverseOrder={false} />
   </BrowserRouter>
 );
 
