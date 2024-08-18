@@ -44,6 +44,7 @@ const AddIndustryForm = () => {
 
   const handleSubmit = (e: { preventDefault: () => void }) => {
     e.preventDefault();
+    dispatch(addIndustry(formData));
     console.log(formData);
     let combined_add = `${formData.address.line1}, ${formData.address.city}, ${formData.address.state}, ${formData.address.country} - ${formData.address.pincode},`;
     let payload = { ...formData, address: combined_add };
