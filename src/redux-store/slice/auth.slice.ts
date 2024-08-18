@@ -74,10 +74,10 @@ export const fetchIndustryInsight = createAsyncThunk(
 
 export const addIndustry = createAsyncThunk(
   "stats/addIndustry",
-  async () => {
+  async (payload: object) => {
     try {
       let url = `${BASE_URL}/industry/add`;
-      const { data }: any = await axiosInstance.post(url);
+      const { data }: any = await axiosInstance.post(url, payload);
       console.log("Industry Added", data)
       return data.data;
 
