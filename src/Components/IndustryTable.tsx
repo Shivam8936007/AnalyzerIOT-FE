@@ -3,9 +3,10 @@ import React from "react";
 import moment from "moment";
 import { useSelector } from "react-redux";
 import { RootState } from "../redux-store/store";
+import { useNavigate } from 'react-router-dom';
 
-const getStateFromAddress = (address: string): string => {
-  // Remove any hyphens from the address
+const getStateFromAddress = (address: string): string => {  
+  //Remove any hyphens from the address
   address = address.replace("-", "");
 
   // Split the address into an array of words
@@ -25,7 +26,7 @@ return addressArray[len - 1];
 };
 
 const IndustryTable = () => {
-
+  const navigate = useNavigate(); 
   const industryList = useSelector(
     (state: RootState) => state.userData.industryInsight
   );
@@ -71,9 +72,9 @@ const IndustryTable = () => {
                 <tr
                   key={item?.id}
                   className="text-left border-gray-800 font-Montserrat cursor-pointer hover:bg-slate-100"
-                  //   onClick={() =>
-                  //     router.push(`/sessions/${item?.transaction_id}`)
-                  //   }
+                    onClick={() =>
+                      navigate(`/industry/${item?.id}`)
+                    }
                 >
                   <td className="py-4 px-4 text-cyan-800 text-[.87rem] text-[600] font-Montserrat r">
                     {item?.id || "N/A"}

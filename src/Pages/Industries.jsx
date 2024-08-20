@@ -6,15 +6,13 @@ import SiteStatsCard from "../Components/SiteStatsCard";
 import SmallStatsCard from "../Components/SmallStatsCard";
 import Map from "../Components/Map";
 import IndustryTable from "../Components/IndustryTable";
-import {fetchIndustryInsight} from "../redux-store/slice/auth.slice"
-import { useEffect, } from "react";
+import { fetchIndustryInsight } from "../redux-store/slice/auth.slice";
+import { useEffect } from "react";
 import { useAppDispatch } from "../redux-store/hook";
 
 Chart.register(ArcElement, Tooltip, Legend);
 
-
 const Industries = () => {
-
   const dispatch = useAppDispatch();
 
   const data = {
@@ -39,7 +37,7 @@ const Industries = () => {
   };
 
   useEffect(() => {
-    dispatch( fetchIndustryInsight());
+    dispatch(fetchIndustryInsight());
   }, [dispatch]);
 
   return (
@@ -53,7 +51,7 @@ const Industries = () => {
               <p className="text-xl font-semibold">Industry Status Overview</p>
             </div>
             <div className="md:w-full overflow-auto ">
-              <Pie data={data} options={options}/>
+              <Pie data={data} options={options} />
             </div>
           </div>
         </div>
@@ -65,7 +63,7 @@ const Industries = () => {
       </div>
       <div className="mt-6">
         <div className="p-1 rounded-3xl back_transparent h-[44rem]">
-        <IndustryTable />
+          <IndustryTable />
         </div>
       </div>
       <div className="mt-20 w-1 h-1"></div>

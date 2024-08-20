@@ -7,7 +7,7 @@ import {
   useNavigate,
 } from "react-router-dom";
 import { Navbar, Sidebar } from "./Components";
-import { Industries, Login, AddIndustry } from "./Pages";
+import { Industries, Login, AddIndustry, IndustryDetail } from "./Pages";
 import "./App.css";
 import ProtectedRoute from "./ProtectedRoute";
 import Cookies from "js-cookie";
@@ -54,6 +54,7 @@ const AppContent: React.FC = () => {
             <Route element={<ProtectedRoute />}>
               <Route path="/panel" element={<Industries />} />
               <Route path="/add-industries" element={<AddIndustry />} />
+              <Route path="/industry/:id" element={<IndustryDetail />} />
             </Route>
           </Routes>
         </div>
