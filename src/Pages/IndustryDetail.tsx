@@ -47,3 +47,29 @@ const IndustryDetail: React.FC = () => {
 };
 
 export default IndustryDetail;
+
+
+
+
+// import SmallStatsCard from "../Components/Industry-Details/SmallStatsCard";
+// import SiteStatsCard from "../Components/Industry-Details/SiteStatsCard";
+// import Details from "../Components/Industry-Details/Details";
+// import  DownloadCard from "../Components/Industry-Details/Downloads"
+// import ButtonCard  from "../Components/Industry-Details/Button"
+// const IndustryDetails = () =>{
+//     return (
+//       <div>
+//        <div className="flex flex-row gap-5">
+//          <div>
+//           <SiteStatsCard />
+//         <SmallStatsCard/>
+//         < DownloadCard/>
+//         <ButtonCard />
+//        </div>
+//          <Details/>
+//        </div>
+   
+//        </div>
+//     )
+//  };
+//  export default IndustryDetails;

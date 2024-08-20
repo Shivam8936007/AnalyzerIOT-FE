@@ -566,6 +566,61 @@ export const earningData = [
   },
 ];
 
+export const Card =[ {
+  icon: <FaIndustry className="w-6 h-6 text-yellow-500" />,
+  amount: '9',
+  title: 'CEMS',
+  iconColor: '#03C9D7',
+  iconBg: '#ffffff',
+  pcColor: 'red-600',
+},
+{
+  icon: <BsBoxSeam />,
+  amount: '305',
+ 
+  title: 'EQMS',
+  iconColor: 'rgb(255, 244, 229)',
+  iconBg: 'rgb(254, 201, 15)',
+  pcColor: 'green-600',
+},
+{
+  icon: <FiBarChart />,
+  amount: '10',
+ 
+  title: 'AAQMS',
+  iconColor: 'rgb(228, 106, 118)',
+  iconBg: 'rgb(255, 244, 229)',
+
+  pcColor: 'green-600',
+},]
+
+export const Download= [{
+  icon: <FaIndustry className="w-6 h-6 text-yellow-500" />,
+  amount: '9',
+  title: 'SPCB',
+  iconColor: '#03C9D7',
+  iconBg: '#ffffff',
+  pcColor: 'red-600',
+},
+{
+  icon: <BsBoxSeam />,
+  amount: '305',
+ 
+  title: 'CPCB',
+  iconColor: 'rgb(255, 244, 229)',
+  iconBg: 'rgb(254, 201, 15)',
+  pcColor: 'green-600',
+},]
+
+export const Button =[{
+  icon: <FaIndustry className="w-6 h-6 text-yellow-500" />,
+  amount: '9',
+  title: 'SPCB',
+  iconColor: '#03C9D7',
+  iconBg: '#ffffff',
+  pcColor: 'red-600',
+},]
+
 export const recentTransactions = [
   {
     icon: <BsCurrencyDollar />,

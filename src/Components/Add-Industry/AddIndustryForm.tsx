@@ -60,7 +60,7 @@ const AddIndustryForm = () => {
         },
       });
     } else {
-      let combined_add = `${formData.address.line1}, ${formData.address.city}, ${formData.address.state}, ${formData.address.country} - ${formData.address.pincode},`;
+      let combined_add = `${formData.address.line1}, ${formData.address.city}, ${formData.address.state} ${formData.address.country} - ${formData.address.pincode}`;
       let payload = { ...formData, address: combined_add };
       dispatch(addIndustry(payload));
       toast.success("Successfully Added Industry!", {
