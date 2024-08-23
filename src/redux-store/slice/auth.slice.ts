@@ -1,26 +1,22 @@
 // src/redux-store/slice/auth.slice.ts
-import { createAsyncThunk, createSlice,isRejectedWithValue, PayloadAction } from '@reduxjs/toolkit';
+import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
 import Cookies from 'js-cookie';
 import { toast } from 'react-toastify';
 import axiosInstance from '../../axios';
 const BASE_URL = 'http://localhost:8001/api/v1';
 
-interface AuthState {
+interface IndustryState {
   user: object | null;
   accessToken: string | null;
   isLoader: boolean;
   isError: boolean | null;
-  industryInsight: [];
-  addIndustry:[];
 }
 
-const initialState: AuthState = {
+const initialState: IndustryState = {
   user: null,
   accessToken: null,
   isLoader: false,
   isError: null,
-  industryInsight: [],
-  addIndustry:[],
 };
 
 export const loginUser = createAsyncThunk<any, any>(
@@ -28,7 +24,7 @@ export const loginUser = createAsyncThunk<any, any>(
   async (data, { rejectWithValue }) => {
     try {
       const url = `${BASE_URL}/auth/login`;
-      const para = { industry_id: data?.userId, password: data?.password};
+      const para = { industry_id: data?.userId, password: data?.password };
       const resp = await axiosInstance.post(url, para);
       if (resp) {
         Cookies.set('accessToken', resp?.data?.token);
@@ -57,21 +53,6 @@ export const logoutUser = createAsyncThunk<any>(
   }
 );
 
-export const fetchIndustryInsight = createAsyncThunk(
-  "stats/IndustryInsight",
-  async () => {
-    try {
-      let url = `${BASE_URL}/industry/all`;
-      const { data }: any = await axiosInstance.get(url);
-      console.log("Fetched Data", data)
-      return data.data;
-
-    } catch (error: any) {
-      return isRejectedWithValue(error);
-    }
-  }
-);
-
 // export const addIndustry = createAsyncThunk(
 //   "stats/addIndustry",
 //   async () => {
@@ -87,20 +68,6 @@ export const fetchIndustryInsight = createAsyncThunk(
 //   }
 // );
 
-
-export const addIndustry = createAsyncThunk(
-  "stats/addIndustry",
-  async (payload: object, { rejectWithValue }) => {
-    try {
-      let url = `${BASE_URL}/industry/add`;
-      const { data }: any = await axiosInstance.post(url, payload);
-      console.log("Industry Added", data)
-      return data.data;
-    } catch (error: any) {
-      return rejectWithValue(error.response?.data || "Failed to add industry");
-    }
-  }
-);
 
 
 const authSlice = createSlice({
@@ -151,13 +118,6 @@ const authSlice = createSlice({
       .addCase(logoutUser.pending, (state) => {
         state.isLoader = true;
       })
-      .addCase(fetchIndustryInsight.fulfilled, (state, action) => {
-        state.industryInsight = action.payload;
-      })
-      .addCase(addIndustry.fulfilled, (state, action) => {
-        state.addIndustry = action.payload;
-      })
-
   }
 });
 

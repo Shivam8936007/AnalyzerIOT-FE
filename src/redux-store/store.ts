@@ -3,16 +3,18 @@ import { configureStore } from '@reduxjs/toolkit';
 import { persistStore, persistReducer } from 'redux-persist';
 import storage from 'redux-persist/lib/storage';
 import authReducer from './slice/auth.slice';
-
+import industryReducer from './slice/industry.slice';
 const persistConfig = {
   key: 'root',
   storage,
 };
 
-const persistedReducer = persistReducer(persistConfig, authReducer);
+const persistedAuthReducer = persistReducer(persistConfig, authReducer);
+const persistedIndustryReducer = persistReducer(persistConfig, industryReducer);
 
 const rootReducer = {
-  userData: persistedReducer,
+  userData: persistedAuthReducer,
+  industryData: persistedIndustryReducer
 };
 
 export function makeStore() {

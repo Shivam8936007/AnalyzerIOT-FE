@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { useSelector } from "react-redux";
 import { RootState } from "../../redux-store/store";
 import { useAppDispatch } from "../../redux-store/hook";
-import { addIndustry } from "../../redux-store/slice/auth.slice";
+import { addIndustry } from "../../redux-store/slice/industry.slice";
 import toast from "react-hot-toast";
 
 const AddIndustryForm = () => {
@@ -23,7 +23,7 @@ const AddIndustryForm = () => {
   const dispatch = useAppDispatch();
 
   const Addindustry = useSelector(
-    (state: RootState) => state.userData.addIndustry
+    (state: RootState) => state.industryData.addIndustry
   );
   console.log("addindustry", Addindustry);
 

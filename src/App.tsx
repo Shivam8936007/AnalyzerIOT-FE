@@ -29,26 +29,17 @@ const AppContent: React.FC = () => {
   const isLoginPage = location.pathname === "/login";
 
   return (
-    // <div className="h-screen w-screen">
-    //     <div className="absolute inset-0 justify-center">
-    //     <div className="bg-shape3 opacity-40 bg-blur"></div>
-    //     <div className="bg-shape1 bg-teal opacity-50 bg-blur"></div>
-    //     <div className="bg-shape2 bg-primary opacity-30 bg-blur"></div>
-    //     <div className="bg-shape1 bg-purple opacity-30 bg-blur"></div>
-    //   </div>
-    <div className={`flex ${!isLoginPage && "dark:bg-main-dark-bg"}`}>
-      {!isLoginPage && (
-        <div className="dark:bg-secondary-dark-bg">
-          <Sidebar />
-        </div>
-      )}
-      <div className="flex flex-col h-screen w-full overflow-y-scroll pl-2 pr-2">
-        {!isLoginPage && (
-          <div className="fixed md:static navbar w-full p-5">
-            {/* <Navbar /> */}
-          </div>
-        )}
-        <div className="w-full p-5">
+    <div
+      className={`dashboard_bg flex min-h-screen overflow-hidden`}
+    >
+      <Sidebar />
+      <div
+        className={
+          "h-screen flex flex-1 flex-col mb-2 mr-5 p-5 overflow-y-auto"
+        }
+      >
+        <Navbar />
+        <main className={"flex items-center ml-5"}>
           <Routes>
             <Route path="/login" element={<Login />} />
             <Route element={<ProtectedRoute />}>
@@ -57,7 +48,7 @@ const AppContent: React.FC = () => {
               <Route path="/industry/:id" element={<IndustryDetail />} />
             </Route>
           </Routes>
-        </div>
+        </main>
       </div>
     </div>
   );

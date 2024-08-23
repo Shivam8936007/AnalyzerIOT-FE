@@ -28,11 +28,8 @@ return addressArray[len - 1];
 const IndustryTable = () => {
   const navigate = useNavigate(); 
   const industryList = useSelector(
-    (state: RootState) => state.userData.industryInsight
+    (state: RootState) => state.industryData.industryList
   );
-
-  console.log("Industry List", industryList);
-
   const header = [
     // { key: 1, title: "S No." },
     { key: 1, title: "Industry ID" },

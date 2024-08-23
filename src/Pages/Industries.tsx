@@ -1,12 +1,11 @@
 import React from "react";
-import { dropdownData, earningData } from "../Data/dummy";
 import { Pie } from "react-chartjs-2";
 import { Chart, ArcElement, Tooltip, Legend } from "chart.js";
 import SiteStatsCard from "../Components/SiteStatsCard";
 import SmallStatsCard from "../Components/SmallStatsCard";
 import Map from "../Components/Map";
 import IndustryTable from "../Components/IndustryTable";
-import { fetchIndustryInsight } from "../redux-store/slice/auth.slice";
+import { fetchIndustryList } from "../redux-store/slice/industry.slice";
 import { useEffect } from "react";
 import { useAppDispatch } from "../redux-store/hook";
 
@@ -37,7 +36,7 @@ const Industries = () => {
   };
 
   useEffect(() => {
-    dispatch(fetchIndustryInsight());
+    dispatch(fetchIndustryList());
   }, [dispatch]);
 
   return (
