@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import ParameterCard from "./ParameterCard";
 const ExpandableCard: React.FC = () => {
   const [isExpanded, setIsExpanded] = useState(false);
 
@@ -8,19 +9,18 @@ const ExpandableCard: React.FC = () => {
   return (
     <div
       className={`overflow-hidden border border-gray-300 rounded-xl shadow-md mb-4 p-5 transform transition-all duration-500 ease-in-out ${
-        isExpanded ? "max-h-96" : "max-h-32"
+        isExpanded ? "max-h-120" : "max-h-32"
       }`}
     >
       <div className="flex justify-between items-center">
-        <h2 className="text-xl font-semibold text-slate-700">Card Title</h2>
+        <h2 className="text-xl font-semibold text-slate-700">Flow Control</h2>
       </div>
       <p
         className={`text-slate-500 transition-all duration-500 ease-in-out ${
           isExpanded ? "opacity-100 mt-4" : "opacity-0 h-0"
         }`}
       >
-        This is some additional content that is revealed when the card expands.
-        It can contain any information, such as device details, graphs, etc.
+        <ParameterCard title="flow" limit="5" parameterId={12}/>
       </p>
       <div className="flex justify-end mt-4">
         <button
