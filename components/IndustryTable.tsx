@@ -3,6 +3,7 @@ import React from "react";
 import { useSelector } from "react-redux";
 import { RootState } from "../redux-store/store";
 import { useRouter } from "next/navigation";
+import { FaSitemap } from "react-icons/fa6";
 
 const getStateFromAddress = (address: string): string => {
   //Remove any hyphens from the address
@@ -24,7 +25,7 @@ const getStateFromAddress = (address: string): string => {
   return addressArray[len - 1];
 };
 
-const IndustryTable = () => {
+const IndustryTable: React.FC = () => {
   const navigate = useRouter();
   const industryList = useSelector(
     (state: RootState) => state.industryData.industryList
@@ -41,21 +42,24 @@ const IndustryTable = () => {
   ];
 
   return (
-    <div className="bg-gradient-to-r from-gradientStart to-gradientEnd  shadow-lg p-4  h-[45rem] w-full rounded-custom">
-      <h2 className=" ml-5 mb-5 text-black text-xl font-semibold  leading-5 w-[100%] font-montserrat">
-        Industry Insight
-      </h2>
+    <div className="glass_background shadow-lg p-4  h-[45rem] w-full rounded-custom">
+      <div className="flex ml-2">
+        <FaSitemap className="w-6 h-6 text-slate-700 mr-4" />
+        <h2 className=" ml-1 mb-5 text-slate-700 text-[1.5rem] font-[600] leading-5 w-[100%] font-montserrat">
+          Industry Insight
+        </h2>
+      </div>
       <div className="overflow-hidden rounded-lg tableLan">
         <div className="overflow-y-auto  h-[40rem] scrollbar-hide">
           {" "}
           {/* This div makes the table scrollable */}
-          <table className="min-w-full bg-gradient-to-r from-gradientStart to-gradientEnd">
-            <thead className="bg-gradient-to-r from-slate-950 to-slate-800 sticky top-0 h-18 round-full">
+          <table className="min-w-full ">
+            <thead className="sticky top-0 h-18 round-3xl glass_background">
               <tr className="rounded-t-xl rounded-b-xl font-Montserrat">
                 {header.map((item, key) => (
                   <th
                     key={item.key}
-                    className="py-4 px-4 text-slate-300 font-Montserrat text-[.87rem] text-[700] text-left first:rounded-tl-lg last:rounded-tr-lg"
+                    className="py-4 px-4 text-slate-700 font-Montserrat text-[.87rem] text-[700] text-left first:rounded-tl-lg last:rounded-tr-lg"
                   >
                     {item.title}
                   </th>
@@ -66,7 +70,7 @@ const IndustryTable = () => {
               {industryList?.map((item: any, index: any) => (
                 <tr
                   key={item?.id}
-                  className="text-left border-gray-800 font-Montserrat cursor-pointer hover:bg-slate-100"
+                  className="text-left border-gray-800 font-Montserrat cursor-pointer hover:bg-slate-300"
                   onClick={() => navigate.push(`/industry/${item?.id}`)}
                 >
                   <td className="py-4 px-4 text-cyan-800 text-[.87rem] text-[600] font-Montserrat r">
@@ -94,10 +98,11 @@ const IndustryTable = () => {
                   <td className="flex-1 px-4 text-cyan-800 text-[.87rem] font-Montserrat leading-[2rem]">
                     {item?.devices.map((e: any, index: number) => (
                       <h5 key={index}>
-                        {e.data_uploaded
+                        {
+                          e.data_uploaded
                           // ? moment(e.data_uploaded).format("DD-MM-YYYY")
                           // : "N/A"
-                          }
+                        }
                       </h5>
                     ))}
                   </td>

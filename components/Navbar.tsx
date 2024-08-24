@@ -4,7 +4,7 @@ import { useDispatch, useSelector } from "react-redux";
 // import Breadcrumbs from "./Breadcrumbs";
 import Cookies from "js-cookie";
 import { IoSettings } from "react-icons/io5";
-import { FaBell } from "react-icons/fa";
+import { FaBell, FaUserAlt } from "react-icons/fa";
 
 interface NavbarProps {
   onDateFilterChange: (selectedDay: string) => void;
@@ -68,13 +68,16 @@ const Navbar: React.FC = () => {
           </select>
         </form> */}
 
-        <button className="relative ml-8">
-          <IoSettings className="text-slate-700 font-bold w-6 h-6" />
+        <button className="relative ml-8 border border-gray-300 rounded-full p-3 hover:border-gray-500">
+          <IoSettings className="text-slate-700 font-bold w-5 h-5" />
           <span className="absolute top-0 right-0 inline-block w-2 h-2 rounded-full"></span>
         </button>
-
-        <button className="relative ml-4">
-          <FaBell className="text-slate-700 font-bold w-6 h-6" />
+        <button className="relative ml-2 border border-gray-300 rounded-full p-3 hover:border-gray-500">
+          <FaBell className="text-slate-700 font-bold w-5 h-5" />
+          <span className="absolute top-0 right-0 inline-block w-2 h-2 rounded-full"></span>
+        </button>
+        <button className="relative ml-2 border border-gray-300 rounded-full p-3 hover:border-gray-500">
+          <FaUserAlt className="text-slate-700 font-bold w-5 h-5" />
           <span className="absolute top-0 right-0 inline-block w-2 h-2 rounded-full"></span>
         </button>
       </div>

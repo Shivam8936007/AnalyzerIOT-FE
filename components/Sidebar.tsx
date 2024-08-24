@@ -66,7 +66,7 @@ const SidebarData = [
   },
 ];
 
-const Sidebar = () => {
+const Sidebar: React.FC = () => {
   const dispatch = useAppDispatch();
   const router = useRouter();
 
@@ -85,10 +85,10 @@ const Sidebar = () => {
     <aside className={`glass_background m-5 rounded-3xl border border-gray-300 ${styles.nav_Card}`}>
       <nav
         className={
-          " h-full flex flex-col  shadow-sm border-r border-opacity-25 border-gray-200"
+          " h-full flex flex-col shadow-sm border-r border-opacity-25 border-gray-200"
         }
       >
-        <div className="p-5 pb-2 flex justify-between item-center w-50 h-50">
+        <div className="p-2 pb-2 flex justify-between item-center w-50 h-50">
           <div
             className={`overflow-hidden transition-all ${
               expanded ? "w-20" : "w-10 ml-2"

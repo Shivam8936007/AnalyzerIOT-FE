@@ -1,37 +1,29 @@
-import React from "react";
+import React, { ReactElement } from "react";
+import { FaIndustry } from "react-icons/fa6";
 
-function SmallStatsCard() {
+interface StatsCardProps {
+  logo: ReactElement;
+  title: string | "" | undefined;
+  value: number | 0 | undefined;
+  change?: string;
+  isPositive?: boolean;
+  unit?: string;
+}
+
+const SmallStatsCard: React.FC<StatsCardProps> = ({ logo, title, value, change, isPositive, unit }) => {
   return (
-    <div className="mt-6 grid sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-5">
-      {earningData.map((item, index) => (
-        <div
-          key={item.title}
-          className={`back_transparent p-1 rounded-3xl  flex flex-col`}
-        >
-          <div className="p-5 rounded-3xl border border-gray-300 ">
-            <button
-              type="button"
-              style={{ color: item.iconColor, backgroundColor: item.iconBg }}
-              className="text-2xl opacity-0.9 rounded-full  p-4 hover:drop-shadow-md"
-            >
-              {item.icon}
-            </button>
-            <p className="mt-3">
-              <span className="text-[2rem] font-[900] text-slate-700">
-                {item.amount}
-              </span>
-              <span
-                className={`text-[1rem] font-[600] text-${item.pcColor} ml-3`}
-              >
-                {item.percentage}
-              </span>
-            </p>
-            <p className="text-[1rem] text-slate-900 font-[600] mt-1">
-              {item.title}
-            </p>
-          </div>
+    <div className="p-5 border-b border-gray-300 rounded-3xl mt-1">
+      <div className="flex gap-16 justify-between items-center">
+        <div className="flex w-[70%]">
+          {logo}
+          <p className="text-[1rem] font-[400] text-slate-500 ml-2">
+            {title}
+          </p>
         </div>
-      ))}
+        <div className="">
+          <p className="text-[1.5rem] font-[800] text-slate-600">{value}</p>
+        </div>
+      </div>
     </div>
   );
 }

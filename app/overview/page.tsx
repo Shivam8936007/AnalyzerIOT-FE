@@ -5,10 +5,10 @@ import { Chart, ArcElement, Tooltip, Legend } from "chart.js";
 import { useEffect } from "react";
 import { useAppDispatch } from "@/redux-store/hook";
 import { fetchIndustryList } from "@/redux-store/slice/industry.slice";
-import SiteStatsCard from "@/components/SiteStatsCard";
-import SmallStatsCard from "@/components/SmallStatsCard";
 import IndustryTable from "@/components/IndustryTable";
 import MapComponent from "@/components/MapComponent";
+import SiteMiscelleneousCard from "@/components/SiteMiscelleneousCard";
+import SmartSiteCard from "@/components/SmartSiteCard";
 
 Chart.register(ArcElement, Tooltip, Legend);
 
@@ -43,23 +43,24 @@ const OverviewPage = () => {
   return (
     <div className="h-screen w-full">
       {/* <p className="text-bold text-[1rem] text-[500] text-slate-700">Site Information</p> */}
-      <div className="flex justify-between gap-5">
-        <div className="glass_background rounded-3xl border border-gray-300">
-          <SiteStatsCard />
+      <div className="flex flex-row gap-5">
+        <div className="glass_background w-[40%] rounded-3xl border border-gray-300">
+          <SmartSiteCard />
         </div>
-        <div className="">
-          <div className="glass_background rounded-3xl border border-gray-300 p-5">
-            <Pie data={data} options={options} />
-          </div>
+        <div className="glass_background rounded-3xl border border-gray-300">
+          <SiteMiscelleneousCard />
+        </div>
+        <div className="w-[30rem] glass_background rounded-3xl border border-gray-300 p-5">
+          <Pie data={data} options={options} />
         </div>
       </div>
       <div className="glass_background h-[20rem] rounded-3xl border border-gray-300 mt-5">
-          <div className="rounded-3xl border border-gray-300 ">
-            <MapComponent />
-          </div>
+        <div className="rounded-3xl border border-gray-300 ">
+          <MapComponent />
         </div>
+      </div>
       {/* <SmallStatsCard /> */}
-      <div className="grid sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-2 gap-5 mt-6 ">
+      {/* <div className="grid sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-2 gap-5 mt-6 ">
         <div className="p-1 rounded-3xl back_transparent h-[44.2rem]">
           <div className="p-5 rounded-3xl border border-gray-300 ">
             <div className="flex justify-between items-center gap-2 mb-10">
@@ -75,7 +76,7 @@ const OverviewPage = () => {
             <MapComponent />
           </div>
         </div>
-      </div>
+      </div> */}
       <div className="mt-6">
         <div className="p-1 rounded-3xl back_transparent h-[44rem]">
           <IndustryTable />
