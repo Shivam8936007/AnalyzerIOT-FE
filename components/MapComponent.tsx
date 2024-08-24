@@ -13,8 +13,8 @@ L.Icon.Default.mergeOptions({
   shadowUrl: require('leaflet/dist/images/marker-shadow.png'),
 });
 
-const MapComponent: React.FC = () => {
-  const position = [51.505, -0.09]; // Default position
+const AllLocationOnMapCard: React.FC = () => {
+  const position: any = [51.505, -0.09]; // Default position
   return (
     <MapContainer center={position} zoom={13} style={{ height: '44rem', width: '100%' }}>
       <TileLayer
@@ -30,4 +30,4 @@ const MapComponent: React.FC = () => {
   );
 };
 
-export default MapComponent;
+export default AllLocationOnMapCard;

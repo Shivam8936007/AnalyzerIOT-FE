@@ -6,7 +6,7 @@ import { useEffect } from "react";
 import { useAppDispatch } from "@/redux-store/hook";
 import { fetchIndustryList } from "@/redux-store/slice/industry.slice";
 import IndustryTable from "@/components/IndustryTable";
-import MapComponent from "@/components/MapComponent";
+import AllLocationOnMapCard from "@/components/MapComponent";
 import SiteMiscelleneousCard from "@/components/SiteMiscelleneousCard";
 import SmartSiteCard from "@/components/SmartSiteCard";
 
@@ -56,7 +56,7 @@ const OverviewPage = () => {
       </div>
       <div className="glass_background h-[20rem] rounded-3xl border border-gray-300 mt-5">
         <div className="rounded-3xl border border-gray-300 ">
-          <MapComponent />
+          <AllLocationOnMapCard />
         </div>
       </div>
       <div className="mt-6 glass_background rounded-3xl border border-gray-300 h-[40rem]">

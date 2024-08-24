@@ -9,8 +9,10 @@ import { FaBell, FaUserAlt } from "react-icons/fa";
 interface NavbarProps {
   onDateFilterChange: (selectedDay: string) => void;
 }
-
-const Navbar: React.FC = () => {
+interface NavbarPrarameter {
+  title: string | "" | undefined;
+}
+const Navbar: React.FC<NavbarPrarameter> = ({title}) => {
   const dispatch = useDispatch();
 
   const daysOfWeek = [
@@ -27,7 +29,7 @@ const Navbar: React.FC = () => {
       <div>
         {/* <Breadcrumbs /> */}
         <h1 className="text-slate-700 font-Montserrat text-[1.5rem] font-bold">
-          {"Overview"}
+          {title}
         </h1>
       </div>
       <div className="flex items-center text-gray-400 ml-2 pl-1 font-Montserrat bg-transparent Nav_Filter">

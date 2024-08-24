@@ -21,7 +21,7 @@ export default function ExceedenceLayout({
           "h-screen flex flex-1 flex-col mb-2 mr-5 p-5 overflow-y-auto"
         }
       >
-        <Navbar />
+        <Navbar title={"Exceedence"}/>
         <main className={"flex items-center mt-5"}>{children}</main>
       </div>
     </div>
