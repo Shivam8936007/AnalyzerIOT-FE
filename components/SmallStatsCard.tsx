@@ -8,11 +8,12 @@ interface StatsCardProps {
   change?: string;
   isPositive?: boolean;
   unit?: string;
+  border?: string
 }
 
-const SmallStatsCard: React.FC<StatsCardProps> = ({ logo, title, value, change, isPositive, unit }) => {
+const SmallStatsCard: React.FC<StatsCardProps> = ({ logo, title, value, change, isPositive, unit, border }) => {
   return (
-    <div className="p-5 border-b border-gray-300 rounded-3xl mt-1">
+    <div className={`p-5 ${border} border-gray-300 rounded-3xl mt-1`}>
       <div className="flex gap-16 justify-between items-center">
         <div className="flex w-[70%]">
           {logo}

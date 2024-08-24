@@ -42,7 +42,7 @@ const IndustryTable: React.FC = () => {
   ];
 
   return (
-    <div className="glass_background shadow-lg p-4  h-[45rem] w-full rounded-custom">
+    <div className="shadow-lg p-4  h-[45rem] w-full rounded-custom">
       <div className="flex ml-2">
         <FaSitemap className="w-6 h-6 text-slate-700 mr-4" />
         <h2 className=" ml-1 mb-5 text-slate-700 text-[1.5rem] font-[600] leading-5 w-[100%] font-montserrat">
@@ -54,7 +54,7 @@ const IndustryTable: React.FC = () => {
           {" "}
           {/* This div makes the table scrollable */}
           <table className="min-w-full ">
-            <thead className="sticky top-0 h-18 round-3xl glass_background">
+            <thead className="sticky top-0 h-18 round-3xl glass_background bg-slate-200">
               <tr className="rounded-t-xl rounded-b-xl font-Montserrat">
                 {header.map((item, key) => (
                   <th

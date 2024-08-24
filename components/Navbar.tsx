@@ -23,7 +23,7 @@ const Navbar: React.FC = () => {
   const role = Cookies.get("role");
 
   return (
-    <div className="flex items-center justify-between p-8 glass_background rounded-3xl border border-gray-300">
+    <div className="flex items-center justify-between p-8 glass_background rounded-2xl border border-gray-300">
       <div>
         {/* <Breadcrumbs /> */}
         <h1 className="text-slate-700 font-Montserrat text-[1.5rem] font-bold">
@@ -69,15 +69,15 @@ const Navbar: React.FC = () => {
         </form> */}
 
         <button className="relative ml-8 border border-gray-300 rounded-full p-3 hover:border-gray-500">
-          <IoSettings className="text-slate-700 font-bold w-5 h-5" />
+          <IoSettings className="text-slate-700 font-bold w-4 h-4" />
           <span className="absolute top-0 right-0 inline-block w-2 h-2 rounded-full"></span>
         </button>
         <button className="relative ml-2 border border-gray-300 rounded-full p-3 hover:border-gray-500">
-          <FaBell className="text-slate-700 font-bold w-5 h-5" />
+          <FaBell className="text-slate-700 font-bold w-4 h-4" />
           <span className="absolute top-0 right-0 inline-block w-2 h-2 rounded-full"></span>
         </button>
         <button className="relative ml-2 border border-gray-300 rounded-full p-3 hover:border-gray-500">
-          <FaUserAlt className="text-slate-700 font-bold w-5 h-5" />
+          <FaUserAlt className="text-slate-700 font-bold w-4 h-4" />
           <span className="absolute top-0 right-0 inline-block w-2 h-2 rounded-full"></span>
         </button>
       </div>

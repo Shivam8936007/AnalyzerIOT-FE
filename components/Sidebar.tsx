@@ -37,7 +37,7 @@ const SidebarData = [
   {
     icon: <FaIndustry size={28} />,
     text: "Industries",
-    route: "/industries",
+    route: "/industry",
     // role: ["SUPERADMIN"],
   },
   {

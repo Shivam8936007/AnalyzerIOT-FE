@@ -4,7 +4,7 @@ import { useAppDispatch } from "@/redux-store/hook";
 import Sidebar from "@/components/Sidebar";
 import Navbar from "@/components/Navbar";
 
-export default function IndustryLayout({
+export default function SupportLayout({
   children,
 }: Readonly<{
   children: React.ReactNode;

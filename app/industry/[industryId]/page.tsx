@@ -13,7 +13,7 @@ import IndustryCards from "@/components/IndustryCard";
 
 Chart.register(ArcElement, Tooltip, Legend);
 
-const IndustryPage = () => {
+const IndustryDetailsPage = () => {
   const dispatch = useAppDispatch();
 
   useEffect(() => {
@@ -22,7 +22,6 @@ const IndustryPage = () => {
 
   return (
     <div className="h-screen w-full">
-      {/* <p className="text-bold text-[1rem] text-[500] text-slate-700">Site Information</p> */}
       <div className="flex flex-row gap-5 glass_background rounded-3xl border border-gray-300">
         <IndustryCards />
       </div>
@@ -34,4 +33,4 @@ const IndustryPage = () => {
   );
 };
 
-export default IndustryPage;
+export default IndustryDetailsPage;

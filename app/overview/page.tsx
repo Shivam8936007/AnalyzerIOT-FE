@@ -59,30 +59,10 @@ const OverviewPage = () => {
           <MapComponent />
         </div>
       </div>
-      {/* <SmallStatsCard /> */}
-      {/* <div className="grid sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-2 gap-5 mt-6 ">
-        <div className="p-1 rounded-3xl back_transparent h-[44.2rem]">
-          <div className="p-5 rounded-3xl border border-gray-300 ">
-            <div className="flex justify-between items-center gap-2 mb-10">
-              <p className="text-xl font-semibold">Industry Status Overview</p>
-            </div>
-            <div className="md:w-full overflow-auto ">
-              <Pie data={data} options={options} />
-            </div>
-          </div>
-        </div>
-        <div className="p-1 rounded-3xl back_transparent  h-[44.2rem]">
-          <div className="rounded-3xl border border-gray-300 ">
-            <MapComponent />
-          </div>
-        </div>
-      </div> */}
-      <div className="mt-6">
-        <div className="p-1 rounded-3xl back_transparent h-[44rem]">
+      <div className="mt-6 glass_background rounded-3xl border border-gray-300 h-[40rem]">
           <IndustryTable />
-        </div>
       </div>
-      <div className="mt-20 w-1 h-1"></div>
+      <div className="mt-10 w-1 h-1"></div>
     </div>
   );
 };
