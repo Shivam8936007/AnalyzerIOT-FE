@@ -1,9 +1,11 @@
 import { setAddIndustryModalOpen } from "@/redux-store/slice/industry.slice";
 import { RootState } from "@/redux-store/store";
 import React from "react";
-import { FaTimes } from "react-icons/fa";
+import { FaMapMarkerAlt, FaTimes } from "react-icons/fa";
 import { useSelector, useDispatch } from "react-redux";
-import { motion } from "framer-motion";
+import { AnimatePresence, motion } from "framer-motion";
+import styles from "../app/industry/addIndustryModal.module.css"; // Import the CSS module
+import { FaCity, FaEnvelope, FaFlag, FaGlobe, FaIndustry, FaMapPin, FaPhone, FaUser } from "react-icons/fa6";
 
 const modalVariants = {
   hidden: {
@@ -45,114 +47,177 @@ const AddIndustryModal: React.FC = () => {
   };
 
   return (
-    <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
-      <motion.div
-        className="relative bg-white rounded-3xl w-[40%] p-20"
-        variants={modalVariants}
-        initial="hidden"
-        animate="visible"
-        exit="exit"
-      >
-        <button
-          onClick={handleClose}
-          className="absolute top-3 right-3 bg-red-500 text-white rounded-full p-2 hover:bg-red-600 transition-all"
+    <AnimatePresence>
+      <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
+        <motion.div
+          className="relative bg-white rounded-3xl w-[40%] p-20"
+          variants={modalVariants}
+          initial="hidden"
+          animate="visible"
+          exit="exit"
         >
-          <FaTimes />
-        </button>
-        <h2 className="text-2xl font-semibold mb-4">Add Industry</h2>
-        <form className="space-y-6">
-          <div className="relative">
-            <input
-              type="text"
-              id="name"
-              className="w-full border border-gray-400 rounded-xl p-3 text-gray-900 placeholder-transparent focus:outline-none focus:border-blue-500 peer transition-all"
-              placeholder="Name"
-            />
-            <label
-              htmlFor="name"
-              className="absolute left-4 top-1/2 transform -translate-y-1/2 text-gray-500 bg-white px-2 transition-all peer-placeholder-shown:top-1/2 peer-placeholder-shown:left-4 peer-placeholder-shown:text-gray-400 peer-focus:left-2 peer-focus:-top-2 peer-focus:text-sm peer-focus:text-blue-500"
-            >
-              Name
-            </label>
-          </div>
-
-          <div className="relative">
-            <input
-              type="email"
-              id="email"
-              className="w-full border border-gray-400 rounded-xl p-3 text-gray-900 placeholder-transparent focus:outline-none focus:border-blue-500 peer transition-all"
-              placeholder="Email"
-            />
-            <label
-              htmlFor="email"
-              className="absolute left-4 top-1/2 transform -translate-y-1/2 text-gray-500 bg-white px-2 transition-all peer-placeholder-shown:top-1/2 peer-placeholder-shown:left-4 peer-placeholder-shown:text-gray-400 peer-focus:left-2 peer-focus:-top-2 peer-focus:text-sm peer-focus:text-blue-500"
-            >
-              Email
-            </label>
-          </div>
-
-          <div className="relative">
-            <input
-              type="text"
-              id="phone"
-              className="w-full border border-gray-400 rounded-xl p-3 text-gray-900 placeholder-transparent focus:outline-none focus:border-blue-500 peer transition-all"
-              placeholder="Phone Number"
-            />
-            <label
-              htmlFor="phone"
-              className="absolute left-4 top-1/2 transform -translate-y-1/2 text-gray-500 bg-white px-2 transition-all peer-placeholder-shown:top-1/2 peer-placeholder-shown:left-4 peer-placeholder-shown:text-gray-400 peer-focus:left-2 peer-focus:-top-2 peer-focus:text-sm peer-focus:text-blue-500"
-            >
-              Phone Number
-            </label>
-          </div>
-
-          <div className="relative">
-            <input
-              type="text"
-              id="industry"
-              className="w-full border border-gray-400 rounded-xl p-3 text-gray-900 placeholder-transparent focus:outline-none focus:border-blue-500 peer transition-all"
-              placeholder="Industry"
-            />
-            <label
-              htmlFor="industry"
-              className="absolute left-4 top-1/2 transform -translate-y-1/2 text-gray-500 bg-white px-2 transition-all peer-placeholder-shown:top-1/2 peer-placeholder-shown:left-4 peer-placeholder-shown:text-gray-400 peer-focus:left-2 peer-focus:-top-2 peer-focus:text-sm peer-focus:text-blue-500"
-            >
-              Industry
-            </label>
-          </div>
-
-          <div className="relative">
-            <input
-              type="text"
-              id="address"
-              className="w-full border border-gray-400 rounded-xl p-3 text-gray-900 placeholder-transparent focus:outline-none focus:border-blue-500 peer transition-all"
-              placeholder="Address"
-            />
-            <label
-              htmlFor="address"
-              className="absolute left-4 top-1/2 transform -translate-y-1/2 text-gray-500 bg-white px-2 transition-all peer-placeholder-shown:top-1/2 peer-placeholder-shown:left-4 peer-placeholder-shown:text-gray-400 peer-focus:left-2 peer-focus:-top-2 peer-focus:text-sm peer-focus:text-blue-500"
-            >
-              Address
-            </label>
-          </div>
-        </form>
-        <div className="flex justify-end mt-10">
           <button
-            type="button"
             onClick={handleClose}
-            className="bg-red-400 text-white px-4 py-2 rounded-lg hover:bg-orange-600 transition-all"
+            className="absolute top-3 right-3 bg-red-500 text-white rounded-full p-2 hover:bg-red-600 transition-all"
           >
-            Cancel
+            <FaTimes />
           </button>
-          <button
-            type="submit"
-            className="bg-indigo-400 text-white px-4 py-2 rounded-lg ml-2 hover:bg-green-600 transition-all"
-          >
-            Submit
-          </button>
-        </div>
-      </motion.div>
-    </div>
+          <h2 className="text-2xl font-semibold mb-4">Add Industry</h2>
+          <form className="space-y-6">
+            <div className={styles.form}>
+              <FaUser className={styles.icon} />
+              <input
+                type="text"
+                id="name"
+                className={styles.form__input}
+                placeholder=" "
+                required
+              />
+              <label htmlFor="name" className={styles.form__label}>
+                Name
+              </label>
+            </div>
+
+            <div className={styles.form}>
+              <FaEnvelope className={styles.icon} />
+              <input
+                type="email"
+                id="email"
+                className={styles.form__input}
+                placeholder=" "
+                required
+              />
+              <label htmlFor="email" className={styles.form__label}>
+                Email
+              </label>
+            </div>
+
+            <div className={styles.form}>
+              <FaPhone className={styles.icon} />
+              <input
+                type="text"
+                id="phone"
+                className={styles.form__input}
+                placeholder=" "
+                required
+              />
+              <label htmlFor="phone" className={styles.form__label}>
+                Phone Number
+              </label>
+            </div>
+
+            <div className={styles.form}>
+              <FaIndustry className={styles.icon} />
+              <input
+                type="text"
+                id="industry"
+                className={styles.form__input}
+                placeholder=" "
+                required
+              />
+              <label htmlFor="industry" className={styles.form__label}>
+                Industry
+              </label>
+            </div>
+
+            {/* Address Section */}
+            <div className="mt-10">
+              <h3 className="text-lg font-semibold mb-2">Address</h3>
+              <div className="space-y-6">
+                <div className={styles.form}>
+                  <FaMapMarkerAlt className={styles.icon} />
+                  <input
+                    type="text"
+                    id="line1"
+                    className={styles.form__input}
+                    placeholder=" "
+                    required
+                  />
+                  <label htmlFor="line1" className={styles.form__label}>
+                    Line 1
+                  </label>
+                </div>
+
+                <div className="grid grid-cols-2 gap-4">
+                  <div className={styles.form}>
+                    <FaCity className={styles.icon} />
+                    <input
+                      type="text"
+                      id="city"
+                      className={styles.form__input}
+                      placeholder=" "
+                      required
+                    />
+                    <label htmlFor="city" className={styles.form__label}>
+                      City
+                    </label>
+                  </div>
+                  <div className={styles.form}>
+                    <FaFlag className={styles.icon} />
+                    <input
+                      type="text"
+                      id="state"
+                      className={styles.form__input}
+                      placeholder=" "
+                      required
+                    />
+                    <label htmlFor="state" className={styles.form__label}>
+                      State
+                    </label>
+                  </div>
+                </div>
+
+                <div className="grid grid-cols-2 gap-4">
+                  <div className={styles.form}>
+                    <FaGlobe className={styles.icon} />
+                    <input
+                      type="text"
+                      id="country"
+                      className={styles.form__input}
+                      value="India" // Pre-filled value
+                      readOnly
+                      placeholder=" "
+                    />
+                    <label htmlFor="country" className={styles.form__label}>
+                      Country
+                    </label>
+                  </div>
+                  <div className={styles.form}>
+                    <FaMapPin className={styles.icon} />
+                    <input
+                      type="text"
+                      id="pincode"
+                      className={styles.form__input}
+                      placeholder=" "
+                      required
+                    />
+                    <label htmlFor="pincode" className={styles.form__label}>
+                      Pincode
+                    </label>
+                  </div>
+                </div>
+              </div>
+            </div>
+            {/* End of Address Section */}
+          </form>
+          <div className="flex justify-end mt-10">
+            <button
+              type="button"
+              onClick={handleClose}
+              className="bg-red-400 text-white px-4 py-2 rounded-lg hover:bg-orange-600 transition-all"
+            >
+              Cancel
+            </button>
+            <button
+              type="submit"
+              className="bg-indigo-400 text-white px-4 py-2 rounded-lg ml-2 hover:bg-green-600 transition-all"
+            >
+              Submit
+            </button>
+          </div>
+        </motion.div>
+      </div>
+    </AnimatePresence>
   );
 };
 
