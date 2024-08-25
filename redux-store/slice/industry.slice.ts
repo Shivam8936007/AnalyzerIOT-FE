@@ -7,6 +7,7 @@ import axiosInstance from '../../axios/Axios';
 const BASE_URL = 'http://localhost:8001/api/v1';
 
 interface AuthState {
+  isAddIndustryModal: boolean | false;
   isLoader: boolean;
   isError: boolean | null;
   industryList: [];
@@ -14,6 +15,7 @@ interface AuthState {
 }
 
 const initialState: AuthState = {
+  isAddIndustryModal: false,
   isLoader: false,
   isError: null,
   industryList: [],
@@ -53,7 +55,11 @@ export const addIndustry = createAsyncThunk(
 const industrySlice = createSlice({
   name: 'industry',
   initialState,
-  reducers: {},
+  reducers: {
+    setAddIndustryModalOpen(state, action: PayloadAction<boolean>) {
+      state.isAddIndustryModal = action.payload;
+    },
+  },
   extraReducers: (builder) => {
     builder
       .addCase(fetchIndustryList.fulfilled, (state, action) => {
@@ -68,5 +74,6 @@ const industrySlice = createSlice({
 
   }
 });
+export const { setAddIndustryModalOpen } = industrySlice.actions;
 
 export default industrySlice.reducer;

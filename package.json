@@ -17,6 +17,7 @@
     "@types/leaflet": "^1.9.12",
     "axios": "^1.7.4",
     "chart.js": "^4.4.4",
+    "framer-motion": "^11.3.30",
     "js-cookie": "^3.0.5",
     "leaflet": "^1.9.4",
     "moment": "^2.30.1",
