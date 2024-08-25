@@ -39,9 +39,9 @@ export default function Login() {
   }, [accessToken, navigate]);
 
   return (
-    <div className="flex flex-col items-center justify-center min-h-screen py-2 font-montserrat rounded-3xl">
+    <div className="flex glass_background flex-col items-center justify-center min-h-screen py-2 font-montserrat rounded-3xl">
       <main className="flex flex-col items-center justify-center w-full flex-1 px-20 text-center">
-        <div className="flex w-2/3 max-w-4xl back_transparent rounded-3xl bg-opacity-95 shadow-inner shadow-gray-200 z-10">
+        <div className="flex w-2/3 max-w-4xl  rounded-3xl bg-opacity-95 shadow-inner shadow-gray-200 z-10">
           <div className="p-5 flex rounded-3xl border border-gray-300 ">
             <div className="w-1/2 p-2 ">
               <form onSubmit={handleSubmit}>
