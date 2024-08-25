@@ -1,9 +1,9 @@
 import { setAddIndustryModalOpen } from "@/redux-store/slice/industry.slice";
 import { RootState } from "@/redux-store/store";
-import React, { useState } from "react";
+import React from "react";
 import { FaTimes } from "react-icons/fa";
-import { useSelector } from "react-redux";
-import { useDispatch } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
+import { motion } from "framer-motion";
 
 const modalVariants = {
   hidden: {
@@ -37,15 +37,21 @@ const AddIndustryModal: React.FC = () => {
   const isAddIndustryModal = useSelector(
     (state: RootState) => state.industryData.isAddIndustryModal
   );
+
   if (!isAddIndustryModal) return null;
+
   const handleClose = () => {
     dispatch(setAddIndustryModalOpen(false));
   };
+
   return (
     <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
-      <div
-        className="relative bg-white rounded-3xl w-[40%] p-20 transform transition-transform duration-300 ease-out scale-0"
-        style={{ transform: isAddIndustryModal ? "scale(1)" : "scale(0)" }}
+      <motion.div
+        className="relative bg-white rounded-3xl w-[40%] p-20"
+        variants={modalVariants}
+        initial="hidden"
+        animate="visible"
+        exit="exit"
       >
         <button
           onClick={handleClose}
@@ -145,7 +151,7 @@ const AddIndustryModal: React.FC = () => {
             Submit
           </button>
         </div>
-      </div>
+      </motion.div>
     </div>
   );
 };
