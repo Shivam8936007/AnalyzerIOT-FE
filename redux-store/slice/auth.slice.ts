@@ -3,6 +3,7 @@ import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
 import Cookies from 'js-cookie';
 import { toast } from 'react-toastify';
 import axiosInstance from '../../axios/Axios';
+import axios from 'axios';
 const BASE_URL = 'http://localhost:8001/api/v1';
 
 interface IndustryState {
@@ -25,7 +26,7 @@ export const loginUser = createAsyncThunk<any, any>(
     try {
       const url = `${BASE_URL}/auth/login`;
       const para = { industry_id: data?.userId, password: data?.password };
-      const resp = await axiosInstance.post(url, para);
+      const resp = await axios.post(url, para);
       if (resp) {
         Cookies.set('accessToken', resp?.data?.token);
         Cookies.set('user', JSON.stringify(resp.data))

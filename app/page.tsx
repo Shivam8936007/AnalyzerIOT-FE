@@ -19,9 +19,13 @@ export default function Login() {
 
   const handleSubmit = (e: any) => {
     e.preventDefault();
-    dispatch(
+    const result: any = dispatch(
       loginUser({ userId: credentials.userId, password: credentials.password })
     );
+    if (result?.payload) {
+      console.log("data:::::", result?.payload);
+      navigate.replace("/overview");
+    }
   };
 
   const handleFormChange = (e: any) => {
