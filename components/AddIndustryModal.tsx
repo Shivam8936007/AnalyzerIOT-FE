@@ -5,7 +5,16 @@ import { FaMapMarkerAlt, FaTimes } from "react-icons/fa";
 import { useSelector, useDispatch } from "react-redux";
 import { AnimatePresence, motion } from "framer-motion";
 import styles from "../app/industry/addIndustryModal.module.css"; // Import the CSS module
-import { FaCity, FaEnvelope, FaFlag, FaGlobe, FaIndustry, FaMapPin, FaPhone, FaUser } from "react-icons/fa6";
+import {
+  FaCity,
+  FaEnvelope,
+  FaFlag,
+  FaGlobe,
+  FaIndustry,
+  FaMapPin,
+  FaPhone,
+  FaUser,
+} from "react-icons/fa6";
 
 const modalVariants = {
   hidden: {
@@ -50,7 +59,7 @@ const AddIndustryModal: React.FC = () => {
     <AnimatePresence>
       <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
         <motion.div
-          className="relative bg-white rounded-3xl w-[40%] p-20"
+          className="relative bg-white rounded-3xl w-[40%] p-10"
           variants={modalVariants}
           initial="hidden"
           animate="visible"
@@ -63,157 +72,159 @@ const AddIndustryModal: React.FC = () => {
             <FaTimes />
           </button>
           <h2 className="text-2xl font-semibold mb-4">Add Industry</h2>
-          <form className="space-y-6">
-            <div className={styles.form}>
-              <FaUser className={styles.icon} />
-              <input
-                type="text"
-                id="name"
-                className={styles.form__input}
-                placeholder=" "
-                required
-              />
-              <label htmlFor="name" className={styles.form__label}>
-                Name
-              </label>
-            </div>
+          <div className="w-full">
+            <form className="space-y-4">
+              <div className={styles.form}>
+                <FaUser className={styles.icon} />
+                <input
+                  type="text"
+                  id="name"
+                  className={styles.form__input}
+                  placeholder=" "
+                  required
+                />
+                <label htmlFor="name" className={styles.form__label}>
+                  Name
+                </label>
+              </div>
 
-            <div className={styles.form}>
-              <FaEnvelope className={styles.icon} />
-              <input
-                type="email"
-                id="email"
-                className={styles.form__input}
-                placeholder=" "
-                required
-              />
-              <label htmlFor="email" className={styles.form__label}>
-                Email
-              </label>
-            </div>
+              <div className={styles.form}>
+                <FaEnvelope className={styles.icon} />
+                <input
+                  type="email"
+                  id="email"
+                  className={styles.form__input}
+                  placeholder=" "
+                  required
+                />
+                <label htmlFor="email" className={styles.form__label}>
+                  Email
+                </label>
+              </div>
 
-            <div className={styles.form}>
-              <FaPhone className={styles.icon} />
-              <input
-                type="text"
-                id="phone"
-                className={styles.form__input}
-                placeholder=" "
-                required
-              />
-              <label htmlFor="phone" className={styles.form__label}>
-                Phone Number
-              </label>
-            </div>
+              <div className={styles.form}>
+                <FaPhone className={styles.icon} />
+                <input
+                  type="text"
+                  id="phone"
+                  className={styles.form__input}
+                  placeholder=" "
+                  required
+                />
+                <label htmlFor="phone" className={styles.form__label}>
+                  Phone Number
+                </label>
+              </div>
 
-            <div className={styles.form}>
-              <FaIndustry className={styles.icon} />
-              <input
-                type="text"
-                id="industry"
-                className={styles.form__input}
-                placeholder=" "
-                required
-              />
-              <label htmlFor="industry" className={styles.form__label}>
-                Industry
-              </label>
-            </div>
+              <div className={styles.form}>
+                <FaIndustry className={styles.icon} />
+                <input
+                  type="text"
+                  id="industry"
+                  className={styles.form__input}
+                  placeholder=" "
+                  required
+                />
+                <label htmlFor="industry" className={styles.form__label}>
+                  Industry
+                </label>
+              </div>
 
-            {/* Address Section */}
-            <div className="mt-10">
-              <h3 className="text-lg font-semibold mb-2">Address</h3>
-              <div className="space-y-6">
-                <div className={styles.form}>
-                  <FaMapMarkerAlt className={styles.icon} />
-                  <input
-                    type="text"
-                    id="line1"
-                    className={styles.form__input}
-                    placeholder=" "
-                    required
-                  />
-                  <label htmlFor="line1" className={styles.form__label}>
-                    Line 1
-                  </label>
-                </div>
-
-                <div className="grid grid-cols-2 gap-4">
+              {/* Address Section */}
+              <div className="mt-10">
+                <h3 className="text-lg font-semibold mb-2">Address</h3>
+                <div className="space-y-4">
                   <div className={styles.form}>
-                    <FaCity className={styles.icon} />
+                    <FaMapMarkerAlt className={styles.icon} />
                     <input
                       type="text"
-                      id="city"
+                      id="line1"
                       className={styles.form__input}
                       placeholder=" "
                       required
                     />
-                    <label htmlFor="city" className={styles.form__label}>
-                      City
+                    <label htmlFor="line1" className={styles.form__label}>
+                      Line 1
                     </label>
                   </div>
-                  <div className={styles.form}>
-                    <FaFlag className={styles.icon} />
-                    <input
-                      type="text"
-                      id="state"
-                      className={styles.form__input}
-                      placeholder=" "
-                      required
-                    />
-                    <label htmlFor="state" className={styles.form__label}>
-                      State
-                    </label>
-                  </div>
-                </div>
 
-                <div className="grid grid-cols-2 gap-4">
-                  <div className={styles.form}>
-                    <FaGlobe className={styles.icon} />
-                    <input
-                      type="text"
-                      id="country"
-                      className={styles.form__input}
-                      value="India" // Pre-filled value
-                      readOnly
-                      placeholder=" "
-                    />
-                    <label htmlFor="country" className={styles.form__label}>
-                      Country
-                    </label>
+                  <div className="grid grid-cols-2 gap-2">
+                    <div className={styles.form}>
+                      <FaCity className={styles.icon} />
+                      <input
+                        type="text"
+                        id="city"
+                        className={styles.form__input}
+                        placeholder=" "
+                        required
+                      />
+                      <label htmlFor="city" className={styles.form__label}>
+                        City
+                      </label>
+                    </div>
+                    <div className={styles.form}>
+                      <FaFlag className={styles.icon} />
+                      <input
+                        type="text"
+                        id="state"
+                        className={styles.form__input}
+                        placeholder=" "
+                        required
+                      />
+                      <label htmlFor="state" className={styles.form__label}>
+                        State
+                      </label>
+                    </div>
                   </div>
-                  <div className={styles.form}>
-                    <FaMapPin className={styles.icon} />
-                    <input
-                      type="text"
-                      id="pincode"
-                      className={styles.form__input}
-                      placeholder=" "
-                      required
-                    />
-                    <label htmlFor="pincode" className={styles.form__label}>
-                      Pincode
-                    </label>
+
+                  <div className="grid grid-cols-2 gap-2">
+                    <div className={styles.form}>
+                      <FaGlobe className={styles.icon} />
+                      <input
+                        type="text"
+                        id="country"
+                        className={styles.form__input}
+                        value="India" // Pre-filled value
+                        readOnly
+                        placeholder=" "
+                      />
+                      <label htmlFor="country" className={styles.form__label}>
+                        Country
+                      </label>
+                    </div>
+                    <div className={styles.form}>
+                      <FaMapPin className={styles.icon} />
+                      <input
+                        type="text"
+                        id="pincode"
+                        className={styles.form__input}
+                        placeholder=" "
+                        required
+                      />
+                      <label htmlFor="pincode" className={styles.form__label}>
+                        Pincode
+                      </label>
+                    </div>
                   </div>
                 </div>
               </div>
+              {/* End of Address Section */}
+            </form>
+            <div className="flex justify-end mt-10">
+              <button
+                type="button"
+                onClick={handleClose}
+                className="bg-red-400 text-white py-2 px-5 rounded-2xl hover:bg-orange-600 transition-all"
+              >
+                cancel
+              </button>
+              <button
+                type="submit"
+                className="bg-green-400 text-white py-2 px-5 rounded-2xl ml-2 hover:bg-green-600 transition-all"
+              >
+                submit
+              </button>
             </div>
-            {/* End of Address Section */}
-          </form>
-          <div className="flex justify-end mt-10">
-            <button
-              type="button"
-              onClick={handleClose}
-              className="bg-red-400 text-white px-4 py-2 rounded-lg hover:bg-orange-600 transition-all"
-            >
-              Cancel
-            </button>
-            <button
-              type="submit"
-              className="bg-indigo-400 text-white px-4 py-2 rounded-lg ml-2 hover:bg-green-600 transition-all"
-            >
-              Submit
-            </button>
           </div>
         </motion.div>
       </div>
