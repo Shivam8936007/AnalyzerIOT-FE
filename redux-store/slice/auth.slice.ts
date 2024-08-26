@@ -26,7 +26,7 @@ export const loginUser = createAsyncThunk<any, any>(
     try {
       const url = `${BASE_URL}/auth/login`;
       const para = { industry_id: data?.userId, password: data?.password };
-      const resp = await axios.post(url, para);
+      const resp = await axiosInstance.post(url, para);
       if (resp) {
         Cookies.set('accessToken', resp?.data?.token);
         Cookies.set('user', JSON.stringify(resp.data))
