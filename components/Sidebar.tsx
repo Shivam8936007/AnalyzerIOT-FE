@@ -94,14 +94,7 @@ const Sidebar: React.FC = () => {
               expanded ? "w-20" : "w-10 ml-2"
             }`}
           >
-            {/* <div className="rounded-full bg-gray-100"> */}
-            {/* <img
-              src={Logo_Tobor.src}
-              className="w-full rounded-full"
-              alt="Logo"
-              style={{ backgroundColor: "#FFFF" }}
-            /> */}
-            {/* </div> */}
+           
           </div>
           {expanded && (
             <div className="mt-3 ml-2">

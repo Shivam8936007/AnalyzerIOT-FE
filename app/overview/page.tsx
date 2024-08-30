@@ -1,48 +1,62 @@
+
 "use client";
-import React from "react";
-import { Pie } from "react-chartjs-2";
+import React, { useEffect } from "react";
+import { Pie,Doughnut } from "react-chartjs-2";
 import { Chart, ArcElement, Tooltip, Legend } from "chart.js";
-import { useEffect } from "react";
-import { useAppDispatch } from "@/redux-store/hook";
-import { fetchIndustryList } from "@/redux-store/slice/industry.slice";
+import { useAppDispatch, useAppSelector } from "@/redux-store/hook";
+import { fetchIndustryList, fetchMap, fetchSiteInformation } from "@/redux-store/slice/industry.slice";
 import IndustryTable from "@/components/IndustryTable";
 import AllLocationOnMapCard from "@/components/MapComponent";
 import SiteMiscelleneousCard from "@/components/SiteMiscelleneousCard";
 import SmartSiteCard from "@/components/SmartSiteCard";
+import { RootState } from "@/redux-store/store";
+import { useSelector } from "react-redux";
 
 Chart.register(ArcElement, Tooltip, Legend);
 
 const OverviewPage = () => {
   const dispatch = useAppDispatch();
 
-  const data = {
-    labels: ["Active", "Offline", "Delayed"],
+  
+  const siteInformation = useSelector((state: RootState) => state.industryData.siteInformation);
+  
+  useEffect(() => {
+    dispatch(fetchIndustryList());
+    dispatch(fetchSiteInformation());
+    dispatch(fetchMap());
+  }, [dispatch]);
+
+ 
+  const activeCount = siteInformation?.active_sites || 0;
+  const offlineCount = siteInformation?.offline_sites || 0;
+  const delayedCount = siteInformation?.delayed_sites || 0;
+
+
+  const pieData = {
+    labels: ["Active", "Offline", "Delayed"], 
     datasets: [
       {
-        label: "Popularity of colours",
-        data: [96, 23, 55],
-        // you can set indiviual colors for each bar
-        backgroundColor: ["#C3E2C2", "#FA7070", "#FFEAA7"],
-        borderWidth: 1,
+        data: [activeCount, offlineCount, delayedCount], 
+        backgroundColor: ["#36A2EB", "#FF6384", "#FFCE56"], 
+        hoverBackgroundColor: ["#36A2EB", "#FF6384", "#FFCE56"],
       },
     ],
   };
+
   const options = {
+    responsive: true,
     plugins: {
-      title: {
-        display: true,
-        text: "Current Status",
+      legend: {
+        position: 'top',
+      },
+      tooltip: {
+        enabled: true,
       },
     },
   };
 
-  useEffect(() => {
-    dispatch(fetchIndustryList());
-  }, [dispatch]);
-
   return (
     <div className="h-screen w-full">
-      {/* <p className="text-bold text-[1rem] text-[500] text-slate-700">Site Information</p> */}
       <div className="flex flex-row gap-5">
         <div className="glass_background w-[40%] rounded-3xl border border-gray-300">
           <SmartSiteCard />
@@ -51,16 +65,17 @@ const OverviewPage = () => {
           <SiteMiscelleneousCard />
         </div>
         <div className="w-[30rem] glass_background rounded-3xl border border-gray-300 p-5">
-          <Pie data={data} options={options} />
+          {/* <Pie data={pieData}  /> */}
+          <Doughnut data={pieData}  />
         </div>
       </div>
       <div className="glass_background h-[20rem] rounded-3xl border border-gray-300 mt-5">
-        <div className="rounded-3xl border border-gray-300 ">
+        <div className="rounded-3xl border border-gray-300">
           <AllLocationOnMapCard />
         </div>
       </div>
       <div className="mt-6 glass_background rounded-3xl border border-gray-300 h-[40rem]">
-          <IndustryTable />
+        <IndustryTable />
       </div>
       <div className="mt-10 w-1 h-1"></div>
     </div>
@@ -68,3 +83,4 @@ const OverviewPage = () => {
 };
 
 export default OverviewPage;
+

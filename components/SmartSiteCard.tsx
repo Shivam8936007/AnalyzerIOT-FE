@@ -20,6 +20,8 @@ import {
   FaChevronCircleUp,
   FaPauseCircle,
 } from "react-icons/fa";
+import { useSelector } from "react-redux";
+import { RootState } from "@/redux-store/store";
 
 ChartJS.register(
   CategoryScale,
@@ -31,6 +33,12 @@ ChartJS.register(
   Legend
 );
 const SmartSiteCard: React.FC = () => {
+  const siteInformation = useSelector(
+    (state: RootState) => state.industryData.siteInformation
+  );
+
+  console.log("site:::::::::::",siteInformation)
+
   const lineData = {
     labels: ["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"],
     datasets: [
@@ -89,6 +97,7 @@ const SmartSiteCard: React.FC = () => {
     },
   };
 
+ 
   return (
     <div className="p-5">
       <div className="flex justify-between items-center mb-4">
@@ -99,7 +108,7 @@ const SmartSiteCard: React.FC = () => {
         <SlOptions className="w-5 h-5 text-slate-500" />
       </div>
       <div className="flex items-center mb-3">
-        <div className="text-slate-700 text-[1.5rem] font-bold mr-2">39</div>
+        <div className="text-slate-700 text-[1.5rem] font-bold mr-2">{siteInformation?.total_sites}</div>
         <div className="text-slate-500 text-[1rem] font-[400]">Total Sites</div>
       </div>
       <div className="grid grid-cols-3 gap-5 mb-4">
@@ -110,7 +119,7 @@ const SmartSiteCard: React.FC = () => {
               Online
             </div>
           </div>
-          <div className="text-[1.2rem] font-bold text-green-500">35</div>
+          <div className="text-[1.2rem] font-bold text-green-500">{siteInformation.active_sites}</div>
         </div>
         <div className="flex rounded-2xl border border-gray-300 p-2 justify-between items-center gap-3 hover:border-gray-500 cursor-pointer">
           <div className="flex">
@@ -119,7 +128,7 @@ const SmartSiteCard: React.FC = () => {
               Offline
             </div>
           </div>
-          <div className="text-[1.2rem] font-bold text-red-500">5</div>
+          <div className="text-[1.2rem] font-bold text-red-500">{siteInformation.offline_sites}</div>
         </div>
         <div className="flex rounded-2xl border border-gray-300 p-2 justify-between items-center gap-3 hover:border-gray-500 cursor-pointer">
           <div className="flex">
@@ -128,7 +137,7 @@ const SmartSiteCard: React.FC = () => {
               Delayed
             </div>
           </div>
-          <div className="text-[1.2rem] font-bold text-yellow-500">3</div>
+          <div className="text-[1.2rem] font-bold text-yellow-500">{siteInformation.delayed_sites}</div>
         </div>
       </div>
       <div className="mb-3">

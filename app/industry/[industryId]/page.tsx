@@ -2,21 +2,37 @@
 import React from "react";
 import { useEffect } from "react";
 import { useAppDispatch } from "@/redux-store/hook";
-import { fetchIndustryList } from "@/redux-store/slice/industry.slice";
 import SiteMiscelleneousCard from "@/components/SiteMiscelleneousCard";
 import IndustryInfoCard from "@/components/IndustryInfoCard";
 import IndustryLocationOnMapCard from "@/components/IndustryLocationCard";
 import DeviceListCard from "@/components/DeviceListCard";
 import { RiGitPullRequestFill } from "react-icons/ri";
 import { ImEqualizer2 } from "react-icons/im";
+import {
+  fetchIndustryDetails,
+  fetchIndustryLocation,
+} from "@/redux-store/slice/industry.slice";
+import AddIndustryModal from "@/components/AddIndustryModal";
+import { useSelector } from "react-redux";
+import { RootState } from "@/redux-store/store";
+import AddDeviceModal from "@/components/Modal/DetailsModal";
 
-const IndustryDetailsPage = () => {
+interface IndustryContentProps {
+  params: {
+    industryId: number;
+  };
+}
+const IndustryDetailsPage: React.FC<IndustryContentProps> = ({ params }) => {
   const dispatch = useAppDispatch();
 
   useEffect(() => {
-    dispatch(fetchIndustryList());
-  }, [dispatch]);
+    dispatch(fetchIndustryDetails({ industryId: params.industryId }));
+    dispatch(fetchIndustryLocation({ industryId: params.industryId }));
+  }, [dispatch, params.industryId]);
 
+  const isAddDeviceModal = useSelector(
+    (state: RootState) => state.industryData.isAddDeviceModal
+  );
   return (
     <div className="h-screen w-full">
       <div className="flex flex-row gap-5">
@@ -48,7 +64,9 @@ const IndustryDetailsPage = () => {
       <div className="mt-6 glass_background rounded-3xl border border-gray-300 p-5">
         <DeviceListCard />
       </div>
-      <div className="mt-10 w-1 h-1"></div>
+      <div className="mt-10 w-1 h-1">
+        {isAddDeviceModal && <AddDeviceModal />}
+      </div>
     </div>
   );
 };

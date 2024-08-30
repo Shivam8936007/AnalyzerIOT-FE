@@ -80,7 +80,7 @@ const IndustryTable: React.FC = () => {
                     {item?.name || "N/A"}
                   </td>
                   <td className="px-4 text-cyan-800 text-[.87rem] text-[600] font-Montserrat">
-                    {item?.devices.map((e: any) => (
+                    {item?.devices.length > 0 && item?.devices?.map((e: any) => (
                       <>
                         <span
                           className={`flex p-[6px] text-slate-200 rounded-md text-xs m-1 ${

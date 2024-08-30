@@ -3,14 +3,24 @@ import IndustrySvg from "../app/assets/industry.svg";
 import { FaAddressCard, FaSitemap, FaUser } from "react-icons/fa6";
 import { IoDuplicate, IoIdCardSharp } from "react-icons/io5";
 import { BsFillCalendarEventFill } from "react-icons/bs";
+import { useSelector } from "react-redux";
+import { RootState } from "@/redux-store/store";
 
 const IndustryInfoCard: React.FC = () => {
+
+  const industryDetailsCard:any = useSelector(
+    (state: RootState) => state.industryData.industryDetails
+  );
+
+  console.log("details::::::::;",industryDetailsCard)
+
+ 
   return (
     <div className="flex flex-col p-2 gap-2">
       <div className="p-5 rounded-3xl border border-gray-300 flex">
         <FaSitemap className="w-6 h-6 text-slate-700 mr-4" />
         <p className="text-slate-700 font-[600] text-[1.2rem]">
-          100 MLD SEWAGE TREATMENT PLANT
+          {industryDetailsCard[0]?.name}
         </p>
       </div>
       <div className="flex flex-row gap-3">
@@ -22,9 +32,9 @@ const IndustryInfoCard: React.FC = () => {
             <div className="p-2 w-1/2 rounded-3xl ">
               <div className="flex">
                 <FaUser className="w-4 h-4 text-slate-500" />
-                <p className="text-slate-500 text-[.8rem] ml-2">User ID</p>
+                <p className="text-slate-500 text-[.8rem] ml-2">Industry ID</p>
               </div>
-              <p className="text-slate-700 font-[600] text-[1.2rem]">U-68</p>
+              <p className="text-slate-700 font-[600] text-[1.2rem]">{industryDetailsCard[0]?.id}</p>
             </div>
             <div className="p-2 w-1/2 rounded-3xl">
               <div className="flex">
@@ -42,7 +52,7 @@ const IndustryInfoCard: React.FC = () => {
               <p className="text-slate-500 text-[.8rem] ml-2">Address</p>
             </div>
             <p className="text-slate-700 font-[600] text-[1.2rem]">
-              Village Dhanwapur Gurugram Haryana India -122003
+             {industryDetailsCard[0]?.address}
             </p>
           </div>
           <div className="p-2 rounded-3xl">
@@ -50,7 +60,7 @@ const IndustryInfoCard: React.FC = () => {
               <IoDuplicate className="w-4 h-4 text-slate-500" />
               <p className="text-slate-500 text-[.8rem] ml-2">Category</p>
             </div>
-            <p className="text-slate-700 font-[600] text-[1.2rem]">STP</p>
+            <p className="text-slate-700 font-[600] text-[1.2rem]">{industryDetailsCard[0]?.industry_type}</p>
           </div>
           <div className="p-2 rounded-3xl">
             <div className="flex">
@@ -58,7 +68,7 @@ const IndustryInfoCard: React.FC = () => {
               <p className="text-slate-500 text-[.8rem] ml-2">Vendor</p>
             </div>
             <p className="text-slate-700 font-[600] text-[1.2rem]">
-              EIE Complete Solutions
+            {industryDetailsCard[0]?.provider_name}
             </p>
           </div>
           <div className="flex gap-3 flex-row-reverse mt-1">

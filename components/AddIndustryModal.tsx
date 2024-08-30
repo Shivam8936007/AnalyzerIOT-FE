@@ -1,6 +1,7 @@
+import React, { useState } from "react";
 import { setAddIndustryModalOpen } from "@/redux-store/slice/industry.slice";
 import { RootState } from "@/redux-store/store";
-import React from "react";
+
 import { FaMapMarkerAlt, FaTimes } from "react-icons/fa";
 import { useSelector, useDispatch } from "react-redux";
 import { AnimatePresence, motion } from "framer-motion";
@@ -55,6 +56,100 @@ const AddIndustryModal: React.FC = () => {
     dispatch(setAddIndustryModalOpen(false));
   };
 
+  const [formData, setFormData] = useState({
+    name: "",
+    email: "",
+    phoneNumber: "",
+    industry: "",
+    line1: "",
+    city: "",
+    state: "",
+    country: "India", // Pre-filled value
+    pincode: "",
+  });
+
+  const [errors, setErrors] = useState({
+    email: "",
+    phoneNumber: "",
+  });
+
+  const validateEmail = (email: string) => {
+    const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    return emailPattern.test(email);
+  };
+
+  const validatePhoneNumber = (phoneNumber: string) => {
+    const phonePattern = /^[0-9]{10}$/;
+    return phonePattern.test(phoneNumber);
+  };
+
+  const isFormValid = () => {
+    return (
+      formData.name &&
+      formData.email &&
+      formData.phoneNumber &&
+      formData.industry &&
+      formData.line1 &&
+      formData.city &&
+      formData.state &&
+      formData.pincode &&
+      validateEmail(formData.email) &&
+      validatePhoneNumber(formData.phoneNumber)
+    );
+  };
+
+  const handleFormChange = (
+    e: React.ChangeEvent<HTMLInputElement>
+  ) => {
+    const { name, value } = e.target;
+
+    
+    const filteredValue =
+      name === "phoneNumber" ? value.replace(/[^0-9]/g, "") : value;
+
+    setFormData((prevData) => ({
+      ...prevData,
+      [name]: filteredValue,
+    }));
+
+   
+    if (name === "email") {
+      setErrors((prevErrors) => ({ ...prevErrors, email: "" }));
+    } else if (name === "phoneNumber") {
+      setErrors((prevErrors) => ({ ...prevErrors, phoneNumber: "" }));
+    }
+  };
+
+  
+  const handleSubmit = (event: React.FormEvent) => {
+    event.preventDefault();
+
+    let hasErrors = false;
+
+    if (!validateEmail(formData.email)) {
+      setErrors((prevErrors) => ({
+        ...prevErrors,
+        email: "Please enter a valid email address.",
+      }));
+      hasErrors = true;
+    }
+
+    if (!validatePhoneNumber(formData.phoneNumber)) {
+      setErrors((prevErrors) => ({
+        ...prevErrors,
+        phoneNumber: "Please enter a valid 10-digit phone number.",
+      }));
+      hasErrors = true;
+    }
+
+    if (hasErrors) {
+      return;
+    }
+
+   
+    handleClose();
+  };
+
   return (
     <AnimatePresence>
       <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
@@ -73,15 +168,18 @@ const AddIndustryModal: React.FC = () => {
           </button>
           <h2 className="text-2xl font-semibold mb-4">Add Industry</h2>
           <div className="w-full">
-            <form className="space-y-4">
+            <form className="space-y-4"  onSubmit={handleSubmit}>
               <div className={styles.form}>
                 <FaUser className={styles.icon} />
                 <input
-                  type="text"
-                  id="name"
-                  className={styles.form__input}
-                  placeholder=" "
-                  required
+                   type="text"
+                   id="name"
+                   name="name"
+                   className={styles.form__input}
+                   placeholder=" "
+                   value={formData.name}
+                   onChange={handleFormChange}
+                   required
                 />
                 <label htmlFor="name" className={styles.form__label}>
                   Name
@@ -93,27 +191,37 @@ const AddIndustryModal: React.FC = () => {
                 <input
                   type="email"
                   id="email"
+                  name="email"
                   className={styles.form__input}
                   placeholder=" "
+                  value={formData.email}
+                  onChange={handleFormChange}
                   required
                 />
                 <label htmlFor="email" className={styles.form__label}>
                   Email
                 </label>
+                {errors.email && <p className="text-red-500">{errors.email}</p>}
               </div>
 
               <div className={styles.form}>
                 <FaPhone className={styles.icon} />
                 <input
                   type="text"
-                  id="phone"
+                  id="phoneNumber"
+                  name="phoneNumber"
                   className={styles.form__input}
                   placeholder=" "
+                  value={formData.phoneNumber}
+                  onChange={handleFormChange}
                   required
                 />
                 <label htmlFor="phone" className={styles.form__label}>
                   Phone Number
                 </label>
+                {errors.phoneNumber && (
+                  <p className="text-red-500">{errors.phoneNumber}</p>
+                )}
               </div>
 
               <div className={styles.form}>
