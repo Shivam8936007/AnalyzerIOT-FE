@@ -94,6 +94,8 @@ export const fetchIndustryDetails = createAsyncThunk(
   }
 );
 
+
+
 export const fetchIndustryLocation = createAsyncThunk(
   "IndustryLocation/Location",
   async (params: { industryId: number }) => {

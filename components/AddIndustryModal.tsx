@@ -1,5 +1,6 @@
+
 import React, { useState } from "react";
-import { setAddIndustryModalOpen } from "@/redux-store/slice/industry.slice";
+import { addIndustry, setAddIndustryModalOpen } from "@/redux-store/slice/industry.slice";
 import { RootState } from "@/redux-store/store";
 
 import { FaMapMarkerAlt, FaTimes } from "react-icons/fa";
@@ -16,6 +17,11 @@ import {
   FaPhone,
   FaUser,
 } from "react-icons/fa6";
+import axiosInstance from "@/axios/Axios";
+import { toast } from "react-toastify";
+import { useAppDispatch } from "@/redux-store/hook";
+
+const BASE_URL = `${process.env.NEXT_PUBLIC_API_URL}/industry/add`;
 
 const modalVariants = {
   hidden: {
@@ -46,6 +52,7 @@ const modalVariants = {
 
 const AddIndustryModal: React.FC = () => {
   const dispatch = useDispatch();
+  const appDispatch = useAppDispatch();
   const isAddIndustryModal = useSelector(
     (state: RootState) => state.industryData.isAddIndustryModal
   );
@@ -59,14 +66,17 @@ const AddIndustryModal: React.FC = () => {
   const [formData, setFormData] = useState({
     name: "",
     email: "",
-    phoneNumber: "",
-    industry: "",
-    line1: "",
-    city: "",
-    state: "",
-    country: "India", // Pre-filled value
-    pincode: "",
+    phone: "",
+    industry_type: "",
+    address: {
+      line1: "",
+      city: "",
+      state: "",
+      country: "India",
+      pincode: "",
+    },
   });
+
 
   const [errors, setErrors] = useState({
     email: "",
@@ -87,14 +97,14 @@ const AddIndustryModal: React.FC = () => {
     return (
       formData.name &&
       formData.email &&
-      formData.phoneNumber &&
-      formData.industry &&
-      formData.line1 &&
-      formData.city &&
-      formData.state &&
-      formData.pincode &&
+      formData.phone &&
+      formData.industry_type &&
+      formData.address.line1 &&
+      formData.address.city &&
+      formData.address.state &&
+      formData.address.pincode &&
       validateEmail(formData.email) &&
-      validatePhoneNumber(formData.phoneNumber)
+      validatePhoneNumber(formData.phone)
     );
   };
 
@@ -103,7 +113,6 @@ const AddIndustryModal: React.FC = () => {
   ) => {
     const { name, value } = e.target;
 
-    
     const filteredValue =
       name === "phoneNumber" ? value.replace(/[^0-9]/g, "") : value;
 
@@ -112,7 +121,6 @@ const AddIndustryModal: React.FC = () => {
       [name]: filteredValue,
     }));
 
-   
     if (name === "email") {
       setErrors((prevErrors) => ({ ...prevErrors, email: "" }));
     } else if (name === "phoneNumber") {
@@ -120,34 +128,49 @@ const AddIndustryModal: React.FC = () => {
     }
   };
 
-  
-  const handleSubmit = (event: React.FormEvent) => {
-    event.preventDefault();
+  const handleSubmit = (e: { preventDefault: () => void }) => {
+    e.preventDefault();
+    if (
+      formData.email === "" ||
+      formData.phone === "" ||
+      formData.name === "" ||
+      formData.industry_type === ""
+    ) {
+      toast.error("Please enter the complete data", {
+        // icon: "👏",
+        style: {
+          borderRadius: "20px",
+          background: "#333",
+          color: "#fff",
+        },
+      });
+    } else {
+      let combined_add = `${formData.address.line1}, ${formData.address.city}, ${formData.address.state} ${formData.address.country} - ${formData.address.pincode}`;
+      let payload = { ...formData, address: combined_add };
+      appDispatch(addIndustry(payload));
+      toast.success("Successfully Added Industry!", {
+        // icon: "👏",
+        style: {
+          borderRadius: "20px",
+          background: "#333",
+          color: "#fff",
+        },
+      });
 
-    let hasErrors = false;
-
-    if (!validateEmail(formData.email)) {
-      setErrors((prevErrors) => ({
-        ...prevErrors,
-        email: "Please enter a valid email address.",
-      }));
-      hasErrors = true;
+      setFormData({
+        name: "",
+        email: "",
+        phone: "",
+        industry_type: "",
+        address: {
+          line1: "",
+          city: "",
+          state: "",
+          country: "India",
+          pincode: "",
+        },
+      });
     }
-
-    if (!validatePhoneNumber(formData.phoneNumber)) {
-      setErrors((prevErrors) => ({
-        ...prevErrors,
-        phoneNumber: "Please enter a valid 10-digit phone number.",
-      }));
-      hasErrors = true;
-    }
-
-    if (hasErrors) {
-      return;
-    }
-
-   
-    handleClose();
   };
 
   return (
@@ -168,18 +191,18 @@ const AddIndustryModal: React.FC = () => {
           </button>
           <h2 className="text-2xl font-semibold mb-4">Add Industry</h2>
           <div className="w-full">
-            <form className="space-y-4"  onSubmit={handleSubmit}>
+            <form className="space-y-4" onSubmit={handleSubmit}>
               <div className={styles.form}>
                 <FaUser className={styles.icon} />
                 <input
-                   type="text"
-                   id="name"
-                   name="name"
-                   className={styles.form__input}
-                   placeholder=" "
-                   value={formData.name}
-                   onChange={handleFormChange}
-                   required
+                  type="text"
+                  id="name"
+                  name="name"
+                  className={styles.form__input}
+                  placeholder=" "
+                  value={formData.name}
+                  onChange={handleFormChange}
+                  required
                 />
                 <label htmlFor="name" className={styles.form__label}>
                   Name
@@ -208,11 +231,11 @@ const AddIndustryModal: React.FC = () => {
                 <FaPhone className={styles.icon} />
                 <input
                   type="text"
-                  id="phoneNumber"
-                  name="phoneNumber"
+                  id="phone"
+                  name="phone"
                   className={styles.form__input}
                   placeholder=" "
-                  value={formData.phoneNumber}
+                  value={formData.phone}
                   onChange={handleFormChange}
                   required
                 />
@@ -229,11 +252,14 @@ const AddIndustryModal: React.FC = () => {
                 <input
                   type="text"
                   id="industry"
+                  name="industry_type"
                   className={styles.form__input}
                   placeholder=" "
+                  value={formData.industry_type}
+                  onChange={handleFormChange}
                   required
                 />
-                <label htmlFor="industry" className={styles.form__label}>
+                <label htmlFor="industry_type" className={styles.form__label}>
                   Industry
                 </label>
               </div>
@@ -247,8 +273,11 @@ const AddIndustryModal: React.FC = () => {
                     <input
                       type="text"
                       id="line1"
+                      name="address.line1"
                       className={styles.form__input}
                       placeholder=" "
+                      value={formData.address.line1}
+                      onChange={handleFormChange}
                       required
                     />
                     <label htmlFor="line1" className={styles.form__label}>
@@ -262,8 +291,11 @@ const AddIndustryModal: React.FC = () => {
                       <input
                         type="text"
                         id="city"
+                        name="address.city"
                         className={styles.form__input}
                         placeholder=" "
+                        value={formData.address.city}
+                        onChange={handleFormChange}
                         required
                       />
                       <label htmlFor="city" className={styles.form__label}>
@@ -275,8 +307,11 @@ const AddIndustryModal: React.FC = () => {
                       <input
                         type="text"
                         id="state"
+                        name="address.state"
                         className={styles.form__input}
                         placeholder=" "
+                        value={formData.address.state}
+                        onChange={handleFormChange}
                         required
                       />
                       <label htmlFor="state" className={styles.form__label}>
@@ -285,54 +320,54 @@ const AddIndustryModal: React.FC = () => {
                     </div>
                   </div>
 
-                  <div className="grid grid-cols-2 gap-2">
-                    <div className={styles.form}>
-                      <FaGlobe className={styles.icon} />
-                      <input
-                        type="text"
-                        id="country"
-                        className={styles.form__input}
-                        value="India" // Pre-filled value
-                        readOnly
-                        placeholder=" "
-                      />
-                      <label htmlFor="country" className={styles.form__label}>
-                        Country
-                      </label>
-                    </div>
-                    <div className={styles.form}>
-                      <FaMapPin className={styles.icon} />
-                      <input
-                        type="text"
-                        id="pincode"
-                        className={styles.form__input}
-                        placeholder=" "
-                        required
-                      />
-                      <label htmlFor="pincode" className={styles.form__label}>
-                        Pincode
-                      </label>
-                    </div>
+                  <div className={styles.form}>
+                    <FaGlobe className={styles.icon} />
+                    <input
+                      type="text"
+                      id="country"
+                      name="address.country"
+                      className={styles.form__input}
+                      placeholder=" "
+                      value={formData.address.country}
+                      onChange={handleFormChange}
+                      readOnly
+                    />
+                    <label htmlFor="country" className={styles.form__label}>
+                      Country
+                    </label>
+                  </div>
+
+                  <div className={styles.form}>
+                    <FaMapPin className={styles.icon} />
+                    <input
+                      type="text"
+                      id="pincode"
+                      name="pincode"
+                      className={styles.form__input}
+                      placeholder=" "
+                      value={formData.address.pincode}
+                      onChange={handleFormChange}
+                      required
+                    />
+                    <label htmlFor="pincode" className={styles.form__label}>
+                      Pincode
+                    </label>
                   </div>
                 </div>
               </div>
-              {/* End of Address Section */}
+
+              <div className="text-center">
+              <button
+                  type="submit"
+                  className={`${
+                    isFormValid() ? "bg-blue-500 hover:bg-blue-600" : "bg-gray-400 cursor-not-allowed"
+                  } text-white rounded-md px-4 py-2 transition-all`}
+                  disabled={!isFormValid()}
+                >
+                  Add Industry
+                </button>
+              </div>
             </form>
-            <div className="flex justify-end mt-10">
-              <button
-                type="button"
-                onClick={handleClose}
-                className="bg-red-400 text-white py-2 px-5 rounded-2xl hover:bg-orange-600 transition-all"
-              >
-                cancel
-              </button>
-              <button
-                type="submit"
-                className="bg-green-400 text-white py-2 px-5 rounded-2xl ml-2 hover:bg-green-600 transition-all"
-              >
-                submit
-              </button>
-            </div>
           </div>
         </motion.div>
       </div>
